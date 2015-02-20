@@ -1,0 +1,436 @@
+Family;Genus;Common;Species
+Cheirogaleidae;Cheirogaleus;fat-tailed dwarf lemur;Cheirogaleus medius
+Cheirogaleidae;Cheirogaleus;greater dwarf lemur;Cheirogaleus major
+Cheirogaleidae;Cheirogaleus;furry-eared dwarf lemur;Cheirogaleus crossleyi
+Cheirogaleidae;Cheirogaleus;lesser iron-gray dwarf lemur;Cheirogaleus minusculus
+Cheirogaleidae;Cheirogaleus;Sibree's dwarf lemur;Cheirogaleus sibreei
+Cheirogaleidae;Microcebus;gray mouse lemur;Microcebus murinus
+Cheirogaleidae;Microcebus;reddish-gray mouse lemur;Microcebus griseorufus
+Cheirogaleidae;Microcebus;golden-brown mouse lemur;Microcebus ravelobensis
+Cheirogaleidae;Microcebus;northern rufous mouse lemur;Microcebus tavaratra
+Cheirogaleidae;Microcebus;Sambirano mouse lemur;Microcebus sambiranensis
+Cheirogaleidae;Microcebus;Simmons' mouse lemur;Microcebus simmonsi
+Cheirogaleidae;Microcebus;pygmy mouse lemur;Microcebus myoxinus
+Cheirogaleidae;Microcebus;brown mouse lemur;Microcebus rufus
+Cheirogaleidae;Microcebus;Madame Berthe's mouse lemur;Microcebus berthae
+Cheirogaleidae;Microcebus;Goodman's mouse lemur;Microcebus lehilahytsara
+Cheirogaleidae;Microcebus;Jolly's mouse lemur;Microcebus jollyae
+Cheirogaleidae;Microcebus;MacArthur's mouse lemur;Microcebus macarthurii
+Cheirogaleidae;Microcebus;Mittermeier's mouse lemur;Microcebus mittermeieri
+Cheirogaleidae;Microcebus;Claire's mouse lemur;Microcebus mamiratra
+Cheirogaleidae;Microcebus;Bongolava mouse lemur;Microcebus bongolavensis
+Cheirogaleidae;Microcebus;Danfoss' mouse lemur;Microcebus danfossi
+Cheirogaleidae;Microcebus;Lokobe mouse lemur;Microcebus lokobensis
+Cheirogaleidae;Mirza;Coquerel's giant mouse lemur or Coquerel's mouse lemur;Mirza coquereli
+Cheirogaleidae;Mirza;northern giant mouse lemur;Mirza zaza
+Cheirogaleidae;Allocebus;hairy-eared dwarf lemur;Allocebus trichotis
+Cheirogaleidae;Phaner;eastern fork-marked lemur;Phaner furcifer
+Cheirogaleidae;Phaner;pale fork-marked lemur;Phaner pallescens
+Cheirogaleidae;Phaner;Pariente's fork-marked lemur;Phaner parienti
+Cheirogaleidae;Phaner;Amber Mountain fork-marked lemur;Phaner electromontis
+Lemuridae;Eulemur;white-headed lemur;Eulemur albifrons
+Lemuridae;Eulemur;gray-headed lemur;Eulemur cinereiceps
+Lemuridae;Eulemur;collared brown lemur;Eulemur collaris
+Lemuridae;Eulemur;crowned lemur;Eulemur coronatus
+Lemuridae;Eulemur;Sclater's lemur;Eulemur flavifrons
+Lemuridae;Eulemur;common brown lemur;Eulemur fulvus
+Lemuridae;Eulemur;black lemur;Eulemur macaco
+Lemuridae;Eulemur;mongoose lemur;Eulemur mongoz
+Lemuridae;Eulemur;red-bellied lemur;Eulemur rubriventer
+Lemuridae;Eulemur;red-fronted lemur;Eulemur rufifrons
+Lemuridae;Eulemur;red lemur;Eulemur rufus
+Lemuridae;Eulemur;Sanford's brown lemur;Eulemur sanfordi
+Lemuridae;Hapalemur;Lac Alaotra gentle lemur;Hapalemur alaotrensis
+Lemuridae;Hapalemur;golden bamboo lemur;Hapalemur aureus
+Lemuridae;Hapalemur;eastern lesser bamboo lemur;Hapalemur griseus
+Lemuridae;Hapalemur;southern lesser bamboo lemur;Hapalemur meridionalis
+Lemuridae;Hapalemur;western lesser bamboo lemur;Hapalemur occidentalis
+Lemuridae;Lemur;ring-tailed lemur;Lemur Catta
+Lemuridae;Prolemur;greater bamboo lemur;Prolemur simus
+Lemuridae;Varecia;black-and-white ruffed lemur;Varecia variegata
+Lemuridae;Varecia;red ruffed lemur;Varecia rubra
+Lepilemuridae;Lepilemur;Aeecl's sportive lemur;Lepilemur aeeclis
+Lepilemuridae;Lepilemur;Ahmanson's sportive lemur;Lepilemur ahmansoni
+Lepilemuridae;Lepilemur;Ankarana sportive lemur;Lepilemur ankaranensis
+Lepilemuridae;Lepilemur;Betsileo sportive lemur;Lepilemur betsileo
+Lepilemuridae;Lepilemur;gray-backed sportive lemur;Lepilemur dorsalis
+Lepilemuridae;Lepilemur;Milne-Edwards' sportive lemur;Lepilemur edwardsi
+Lepilemuridae;Lepilemur;Fleurete's sportive lemur;Lepilemur fleuretae
+Lepilemuridae;Lepilemur;Grewcock's sportive lemur;Lepilemur grewcocki
+Lepilemuridae;Lepilemur;Hubbard's sportive lemur;Lepilemur hubbardi
+Lepilemuridae;Lepilemur;Holland's sportive lemur;Lepilemur hollandorum
+Lepilemuridae;Lepilemur;James' sportive lemur;Lepilemur jamesi
+Lepilemuridae;Lepilemur;white-footed sportive lemur;Lepilemur leucopus
+Lepilemuridae;Lepilemur;small-toothed sportive lemur;Lepilemur microdon
+Lepilemuridae;Lepilemur;ring sportive lemur;Lepilemur milanoii
+Lepilemuridae;Lepilemur;Mittermeier's sportive lemur;Lepilemur mittermeieri
+Lepilemuridae;Lepilemur;weasel sportive lemur;Lepilemur mustelinus
+Lepilemuridae;Lepilemur;Otto's sportive lemur;Lepilemur otto
+Lepilemuridae;Lepilemur;Petter's sportive lemur;Lepilemur petteri
+Lepilemuridae;Lepilemur;Randrianasoli's sportive lemur;Lepilemur randrianasoli
+Lepilemuridae;Lepilemur;red-tailed sportive lemur;Lepilemur ruficaudatus
+Lepilemuridae;Lepilemur;Sahamalaza sportive lemur;Lepilemur sahamalazensis
+Lepilemuridae;Lepilemur;Scott's sportive lemur;Lepilemur scottorum
+Lepilemuridae;Lepilemur;Seal's sportive lemur;Lepilemur seali
+Lepilemuridae;Lepilemur;northern sportive lemur;Lepilemur septentrionalis
+Lepilemuridae;Lepilemur;Hawks' sportive lemur;Lepilemur tymerlachsoni
+Lepilemuridae;Lepilemur;Wright's sportive lemur;Lepilemur wrighti
+Indriidae;Indri;Indri;Indri indri
+Indriidae;Avahi;Betsileo woolly lemur;Avahi betsileo
+Indriidae;Avahi;Bemaraha woolly lemur;Avahi cleesei
+Indriidae;Avahi;eastern woolly lemur;Avahi laniger
+Indriidae;Avahi;southern woolly lemur;Avahi meridionalis
+Indriidae;Avahi;Moore's woolly lemur;Avahi mooreorum
+Indriidae;Avahi;western woolly lemur;Avahi occidentalis
+Indriidae;Avahi;Peyrieras' woolly lemur;Avahi peyrierasi
+Indriidae;Avahi;Ramanantsoavana's woolly lemur;Avahi ramanantsoavani
+Indriidae;Avahi;Sambirano woolly lemur;Avahi unicolor
+Indriidae;Propithecus;diademed sifaka;Propithecus diadema
+Indriidae;Propithecus;silky sifaka;Propithecus candidus
+Indriidae;Propithecus;Milne-Edwards' sifaka;Propithecus edwardsi
+Indriidae;Propithecus;Perrier's sifaka;Propithecus perrieri
+Indriidae;Propithecus;golden-crowned sifaka;Propithecus tattersalli
+Indriidae;Propithecus;Verreaux's sifaka;Propithecus verreauxi
+Indriidae;Propithecus;Coquerel's sifaka;Propithecus coquereli
+Indriidae;Propithecus;Decken's sifaka;Propithecus deckenii
+Indriidae;Propithecus;crowned sifaka;Propithecus coronatus
+Daubentoniidae;Daubentonia;aye-aye;Daubentonia madagascariensis
+Lorisidae;Arctocebus;Calabar angwantibo;Arctocebus calabarensis
+Lorisidae;Arctocebus;golden angwantibo;Arctocebus aureus
+Lorisidae;Perodicticus;potto;Perodicticus potto
+Lorisidae;Pseudopotto;false potto;Pseudopotto martini
+Lorisidae;Loris;red slender loris;Loris tardigradus
+Lorisidae;Loris;gray slender loris;Loris lydekkerianus
+Lorisidae;Nycticebus;Sunda loris;Nycticebus coucang
+Lorisidae;Nycticebus;Bengal slow loris;Nycticebus bengalensis
+Lorisidae;Nycticebus;pygmy slow loris;Nycticebus pygmaeus
+Galagidae;Galago;Senegal bushbaby;Galago senegalensis
+Galagidae;Galago;Mohol bushbaby;Galago moholi
+Galagidae;Galago;Somali bushbaby;Galago gallarum
+Galagidae;Galago;dusky bushbaby;Galago matschiei
+Galagidae;Galago;Bioko Allen's bushbaby;Galago alleni
+Galagidae;Galago;Cross River bushbaby;Galago cameronensis
+Galagidae;Galago;Gabon bushbaby;Galago gabonensis
+Galagidae;Galago;Zanzibar bushbaby;Galago zanzibaricus
+Galagidae;Galago;Grant's bushbaby;Galago granti
+Galagidae;Galago;Malawi bushbaby;Galago nyasae
+Galagidae;Galago;Uluguru bushbaby;Galago orinus
+Galagidae;Galago;Rondo bushbaby;Galago rondoensis
+Galagidae;Galago;Prince Demidoff's bushbaby;Galago demidoff
+Galagidae;Galago;Thomas's bushbaby;Galago thomasi
+Galagidae;Otolemur;brown greater galago;Otolemur crassicaudatus
+Galagidae;Otolemur;silvery greater galago;Otolemur monteiri
+Galagidae;Otolemur;northern greater galago;Otolemur garnettii
+Galagidae;Euoticus;southern needle-clawed bushbaby;Euoticus elegantulus
+Galagidae;Euoticus;northern needle-clawed bushbaby;Euoticus pallidus
+Tarsiidae;Carlito;Philippine tarsier;Carlito syrichta
+Tarsiidae;Cephalopachus;Western tarsier;Cephalopachus bancanus
+Tarsiidae;Tarsius;Dian's tarsier;Tarsius dentatus
+Tarsiidae;Tarsius;Lariang tarsier;Tarsius lariang
+Tarsiidae;Tarsius;Peleng tarsier;Tarsius pelengensis
+Tarsiidae;Tarsius;Sangihe tarsier;Tarsius sangirensis
+Tarsiidae;Tarsius;Spectral tarsier;Tarsius tarsier
+Tarsiidae;Tarsius;Siau Island tarsier;Tarsius tumpara
+Tarsiidae;Tarsius;Pygmy tarsier;Tarsius pumilus
+Tarsiidae;Tarsius;Wallace's tarsier;Tarsius wallacei
+Tarsiidae;Tarsius;;Tarsius fuscus
+Callitrichidae;Callithrix;common marmoset;Callithrix jacchus
+Callitrichidae;Callithrix;black-tufted marmoset;Callithrix penicillata
+Callitrichidae;Callithrix;Wied's marmoset;Callithrix kuhlii
+Callitrichidae;Callithrix;white-headed marmoset;Callithrix geoffroyi
+Callitrichidae;Callithrix;buffy-headed marmoset;Callithrix flaviceps
+Callitrichidae;Callithrix;buffy-tufted marmoset;Callithrix aurita
+Callitrichidae;Mico;Rio Acari marmoset;Mico acariensis
+Callitrichidae;Mico;silvery marmoset;Mico argentata
+Callitrichidae;Mico;white marmoset;Mico leucippe
+Callitrichidae;Mico;Emilia's marmoset;Mico emiliae
+Callitrichidae;Mico;black-headed marmoset;Mico nigriceps
+Callitrichidae;Mico;manicore marmoset;Mico manicorensis
+Callitrichidae;Mico;Marca's marmoset;Mico marcai
+Callitrichidae;Mico;black-tailed marmoset;Mico melanura
+Callitrichidae;Mico;Santarem marmoset;Mico humeralifera
+Callitrichidae;Mico;Maués marmoset;Mico mauesi
+Callitrichidae;Mico;gold-and-white marmoset;Mico chrysoleuca
+Callitrichidae;Mico;Hershkovitz's marmoset;Mico intermedia
+Callitrichidae;Mico;Rondon's marmoset;Mico rondoni
+Callitrichidae;Callibella;Roosmalens' dwarf marmoset;Callibella humilis
+Callitrichidae;Cebuella;pygmy marmoset;Cebuella pygmaea
+Callitrichidae;Leontopithecus;golden lion tamarin;Leontopithecus rosalia
+Callitrichidae;Leontopithecus;golden-headed lion tamarin;Leontopithecus chrysomelas
+Callitrichidae;Leontopithecus;black lion tamarin;Leontopithecus chrysopygus
+Callitrichidae;Leontopithecus;Superagui lion tamarin;Leontopithecus caissara
+Callitrichidae;Saguinus;red-handed tamarin;Saguinus midas
+Callitrichidae;Saguinus;black tamarin;Saguinus niger
+Callitrichidae;Saguinus;black-mantled tamarin;Saguinus nigricollis
+Callitrichidae;Saguinus;Graells's tamarin;Saguinus graellsi
+Callitrichidae;Saguinus;brown-mantled tamarin;Saguinus fuscicollis
+Callitrichidae;Saguinus;white-mantled tamarin;Saguinus melanoleucus
+Callitrichidae;Saguinus;golden-mantled tamarin;Saguinus tripartitus
+Callitrichidae;Saguinus;moustached tamarin;Saguinus mystax
+Callitrichidae;Saguinus;red-capped tamarin;Saguinus pileatus
+Callitrichidae;Saguinus;white-lipped tamarin;Saguinus labiatus
+Callitrichidae;Saguinus;emperor tamarin;Saguinus imperator
+Callitrichidae;Saguinus;pied tamarin;Saguinus bicolor
+Callitrichidae;Saguinus;Martins's tamarin;Saguinus martinsi
+Callitrichidae;Saguinus;cottontop tamarin or Pinché tamarin;Saguinus oedipus
+Callitrichidae;Saguinus;Geoffroy's tamarin;Saguinus geoffroyi
+Callitrichidae;Saguinus;white-footed tamarin;Saguinus leucopus
+Callitrichidae;Saguinus;mottle-faced tamarin;Saguinus inustus
+Callitrichidae;Callimico;Goeldi's marmoset;Callimico goeldii
+Cebidae;Cebus;white-fronted capuchin;Cebus albifrons
+Cebidae;Cebus;white-headed capuchin;Cebus capucinus
+Cebidae;Cebus;Kaapori capuchin;Cebus kaapori
+Cebidae;Cebus;weeper capuchin;Cebus olivaceus
+Cebidae;Sapajus;tufted capuchin;Sapajus apella
+Cebidae;Sapajus;blond capuchin;Sapajus flavius
+Cebidae;Sapajus;black-striped capuchin;Sapajus libidinosus
+Cebidae;Sapajus;large-headed capuchin;Sapajus macrocephalus
+Cebidae;Sapajus;black capuchin;Sapajus nigritus
+Cebidae;Sapajus;golden-bellied capuchin;Sapajus xanthosternos
+Cebidae;Saimiri;Central American squirrel monkey;Saimiri oerstedii
+Cebidae;Saimiri;common squirrel monkey;Saimiri sciureus
+Cebidae;Saimiri;bare-eared squirrel monkey;Saimiri ustus
+Cebidae;Saimiri;black-capped squirrel monkey;Saimiri boliviensis
+Cebidae;Saimiri;black squirrel monkey;Saimiri vanzolinii
+Aotidae;Aotus;gray-bellied night monkey;Aotus lemurinus
+Aotidae;Aotus;Panamanian night monkey;Aotus zonalis
+Aotidae;Aotus;gray-handed night monkey;Aotus griseimembra
+Aotidae;Aotus;Hernández-Camacho's night monkey;Aotus jorgehernandezi
+Aotidae;Aotus;Brumback's night monkey;Aotus brumbacki
+Aotidae;Aotus;three-striped night monkey;Aotus trivirgatus
+Aotidae;Aotus;Spix's night monkey;Aotus vociferans
+Aotidae;Aotus;Peruvian night monkey;Aotus miconax
+Aotidae;Aotus;Nancy Ma's night monkey;Aotus nancymae
+Aotidae;Aotus;Azara's night monkey;Aotus azarae
+Aotidae;Aotus;black-headed night monkey;Aotus nigriceps
+Pitheciidae;Callicebus;white-eared titi;Callicebus donacophilus
+Pitheciidae;Callicebus;Rio Beni titi;Callicebus modestus
+Pitheciidae;Callicebus;Rio Mayo titi;Callicebus oenanthe
+Pitheciidae;Callicebus;Ollala Brothers' titi;Callicebus olallae
+Pitheciidae;Callicebus;white-coated titi;Callicebus pallescens
+Pitheciidae;Callicebus;Baptista Lake titi;Callicebus baptista
+Pitheciidae;Callicebus;Prince Bernhard's titi;Callicebus bernhardi
+Pitheciidae;Callicebus;brown titi;Callicebus brunneus
+Pitheciidae;Callicebus;ashy black titi;Callicebus cinerascens
+Pitheciidae;Callicebus;Hoffmanns's titi;Callicebus hoffmannsi
+Pitheciidae;Callicebus;red-bellied titi;Callicebus moloch
+Pitheciidae;Callicebus;Barbara Brown's titi;Callicebus barbarabrownae
+Pitheciidae;Callicebus;Coimbra Filho's titi;Callicebus coimbrai
+Pitheciidae;Callicebus;coastal black-handed titi;Callicebus melanochir
+Pitheciidae;Callicebus;black-fronted titi;Callicebus nigrifrons
+Pitheciidae;Callicebus;Atlantic titi;Callicebus personatus
+Pitheciidae;Callicebus;chestnut-bellied titi;Callicebus caligatus
+Pitheciidae;Callicebus;coppery titi;Callicebus cupreus
+Pitheciidae;Callicebus;white-tailed titi;Callicebus discolor
+Pitheciidae;Callicebus;Hershkovitz's titi;Callicebus dubius
+Pitheciidae;Callicebus;ornate titi;Callicebus ornatus
+Pitheciidae;Callicebus;Stephen Nash's titi;Callicebus stephennashi
+Pitheciidae;Callicebus;Lucifer titi;Callicebus lucifer
+Pitheciidae;Callicebus;black titi;Callicebus lugens
+Pitheciidae;Callicebus;Colombian black-handed titi;Callicebus medemi
+Pitheciidae;Callicebus;Rio Purus titi;Callicebus purinus
+Pitheciidae;Callicebus;red-headed titi;Callicebus regulus
+Pitheciidae;Callicebus;collared titi;Callicebus torquatus
+Pitheciidae;Callicebus;Madidi titi;Callicebus aureipalatii
+Pitheciidae;Callicebus;Caquetá titi;Callicebus caquetensis
+Pitheciidae;Pithecia;white-faced saki;Pithecia pithecia
+Pitheciidae;Pithecia;monk saki;Pithecia monachus
+Pitheciidae;Pithecia;Rio Tapajós saki;Pithecia irrorata
+Pitheciidae;Pithecia;equatorial saki;Pithecia aequatorialis
+Pitheciidae;Pithecia;white-footed saki;Pithecia albicans
+Pitheciidae;Chiropotes;black bearded saki;Chiropotes satanas
+Pitheciidae;Chiropotes;red-backed bearded saki;Chiropotes chiropotes
+Pitheciidae;Chiropotes;brown-backed bearded saki;Chiropotes israelita
+Pitheciidae;Chiropotes;Uta Hick's bearded saki;Chiropotes utahickae
+Pitheciidae;Chiropotes;white-nosed saki;Chiropotes albinasus
+Pitheciidae;Cacajao;black-headed uakari;Cacajao melanocephalus
+Pitheciidae;Cacajao;bald uakari;Cacajao calvus
+Pitheciidae;Cacajao;Aracá uakari;Cacajao ayresii
+Pitheciidae;Cacajao;Neblina uakari;Cacajao hosomi
+Atelidae;Alouatta;ursine howler;Alouatta arctoidea
+Atelidae;Alouatta;red-handed howler;Alouatta belzebul
+Atelidae;Alouatta;black howler;Alouatta caraya
+Atelidae;Alouatta;Coiba Island howler;Alouatta coibensis
+Atelidae;Alouatta;Spix's red-handed howler;Alouatta discolor
+Atelidae;Alouatta;brown howler;Alouatta guariba
+Atelidae;Alouatta;Juruá red howler;Alouatta juara
+Atelidae;Alouatta;Guyanan red howler;Alouatta macconnelli
+Atelidae;Alouatta;Amazon black howler;Alouatta nigerrima
+Atelidae;Alouatta;mantled howler;Alouatta palliata
+Atelidae;Alouatta;Guatemalan black howler;Alouatta pigra
+Atelidae;Alouatta;Purus red howler;Alouatta puruensis
+Atelidae;Alouatta;Bolivian red howler;Alouatta sara
+Atelidae;Alouatta;Venezuelan red howler;Alouatta seniculus
+Atelidae;Alouatta;Maranhão red-handed howler;Alouatta ululata
+Atelidae;Ateles;red-faced spider monkey;Ateles paniscus
+Atelidae;Ateles;white-fronted spider monkey;Ateles belzebuth
+Atelidae;Ateles;Peruvian spider monkey;Ateles chamek
+Atelidae;Ateles;brown spider monkey;Ateles hybridus
+Atelidae;Ateles;white-cheeked spider monkey;Ateles marginatus
+Atelidae;Ateles;black-headed spider monkey;Ateles fusciceps
+Atelidae;Ateles;Geoffroy's spider monkey;Ateles geoffroyi
+Atelidae;Brachyteles;southern muriqui;Brachyteles arachnoides
+Atelidae;Brachyteles;northern muriqui;Brachyteles hypoxanthus
+Atelidae;Lagothrix;brown woolly monkey;Lagothrix lagotricha
+Atelidae;Lagothrix;gray woolly monkey;Lagothrix cana
+Atelidae;Lagothrix;Colombian woolly monkey;Lagothrix lugens
+Atelidae;Lagothrix;silvery woolly monkey;Lagothrix poeppigii
+Atelidae;Oreonax;yellow-tailed woolly monkey;Oreonax flavicauda
+Cercopithecinae;Allenopithecus;Allen's swamp monkey;Allenopithecus nigroviridis
+Cercopithecinae;Miopithecus;Angolan talapoin;Miopithecus talapoin
+Cercopithecinae;Miopithecus;Gabon talapoin;Miopithecus ogouensis
+Cercopithecinae;Erythrocebus;Patas monkey;Erythrocebus patas
+Cercopithecinae;Chlorocebus;green monkey;Chlorocebus sabaeus
+Cercopithecinae;Chlorocebus;Grivet;Chlorocebus aethiops
+Cercopithecinae;Chlorocebus;Bale Mountains vervet;Chlorocebus djamdjamensis
+Cercopithecinae;Chlorocebus;Tantalus monkey;Chlorocebus tantalus
+Cercopithecinae;Chlorocebus;Vervet monkey;Chlorocebus pygerythrus
+Cercopithecinae;Chlorocebus;malbrouck;Chlorocebus cynosuros
+Cercopithecinae;Cercopithecus;Dryas monkey or Salongo monkey;Cercopithecus dryas
+Cercopithecinae;Cercopithecus;Diana monkey;Cercopithecus diana
+Cercopithecinae;Cercopithecus;Roloway monkey;Cercopithecus roloway
+Cercopithecinae;Cercopithecus;greater spot-nosed monkey;Cercopithecus nictitans
+Cercopithecinae;Cercopithecus;blue monkey;Cercopithecus mitis
+Cercopithecinae;Cercopithecus;silver monkey;Cercopithecus doggetti
+Cercopithecinae;Cercopithecus;golden monkey;Cercopithecus kandti
+Cercopithecinae;Cercopithecus;Sykes' monkey;Cercopithecus albogularis
+Cercopithecinae;Cercopithecus;mona monkey;Cercopithecus mona
+Cercopithecinae;Cercopithecus;Campbell's mona monkey;Cercopithecus campbelli
+Cercopithecinae;Cercopithecus;Lowe's mona monkey;Cercopithecus lowei
+Cercopithecinae;Cercopithecus;Crested mona monkey;Cercopithecus pogonias
+Cercopithecinae;Cercopithecus;Wolf's mona monkey;Cercopithecus wolfi
+Cercopithecinae;Cercopithecus;Dent's mona monkey;Cercopithecus denti
+Cercopithecinae;Cercopithecus;lesser spot-nosed monkey;Cercopithecus petaurista
+Cercopithecinae;Cercopithecus;white-throated guenon;Cercopithecus erythrogaster
+Cercopithecinae;Cercopithecus;Sclater's guenon;Cercopithecus sclateri
+Cercopithecinae;Cercopithecus;red-eared guenon;Cercopithecus erythrotis
+Cercopithecinae;Cercopithecus;moustached guenon;Cercopithecus cephus
+Cercopithecinae;Cercopithecus;red-tailed monkey;Cercopithecus ascanius
+Cercopithecinae;Cercopithecus;l'Hoest's monkey;Cercopithecus lhoesti
+Cercopithecinae;Cercopithecus;Preuss's monkey;Cercopithecus preussi
+Cercopithecinae;Cercopithecus;sun-tailed monkey;Cercopithecus solatus
+Cercopithecinae;Cercopithecus;Hamlyn's monkey or owl-faced monkey;Cercopithecus hamlyni
+Cercopithecinae;Cercopithecus;de Brazza's monkey;Cercopithecus neglectus
+Cercopithecinae;Macaca;Barbary macaque;Macaca sylvanus
+Cercopithecinae;Macaca;lion-tailed macaque;Macaca silenus
+Cercopithecinae;Macaca;southern pig-tailed macaque or beruk;Macaca nemestrina
+Cercopithecinae;Macaca;northern pig-tailed macaque;Macaca leonina
+Cercopithecinae;Macaca;Pagai Island macaque or bokkoi;Macaca pagensis
+Cercopithecinae;Macaca;Siberut macaque;Macaca siberu
+Cercopithecinae;Macaca;moor macaque;Macaca maura
+Cercopithecinae;Macaca;booted macaque;Macaca ochreata
+Cercopithecinae;Macaca;Tonkean macaque;Macaca tonkeana
+Cercopithecinae;Macaca;Heck's macaque;Macaca hecki
+Cercopithecinae;Macaca;Gorontalo macaque;Macaca nigrescens
+"Cercopithecinae;Macaca;""Celebes crested macaque or black """"ape"""";Macaca nigra"""
+Cercopithecinae;Macaca;Crab-eating macaque or long-tailed macaque or kera;Macaca fascicularis
+Cercopithecinae;Macaca;stump-tailed macaque or bear macaque;Macaca arctoides
+Cercopithecinae;Macaca;rhesus macaque;Macaca mulatta
+Cercopithecinae;Macaca;Formosan rock macaque;Macaca cyclopis
+Cercopithecinae;Macaca;Japanese macaque;Macaca fuscata
+Cercopithecinae;Macaca;toque macaque;Macaca sinica
+Cercopithecinae;Macaca;bonnet macaque;Macaca radiata
+Cercopithecinae;Macaca;Assam macaque;Macaca assamensis
+Cercopithecinae;Macaca;Tibetan macaque or Milne-Edwards' macaque;Macaca thibetana
+Cercopithecinae;Macaca;Arunachal macaque or munzala;Macaca munzala
+Cercopithecinae;Lophocebus;grey-cheeked mangabey;Lophocebus albigena
+Cercopithecinae;Lophocebus;black crested mangabey;Lophocebus aterrimus
+Cercopithecinae;Lophocebus;Opdenbosch's mangabey;Lophocebus opdenboschi
+Cercopithecinae;Lophocebus;Uganda mangabey;Lophocebus ugandae
+Cercopithecinae;Lophocebus;Johnston's mangabey;Lophocebus johnstoni
+Cercopithecinae;Lophocebus;Osman Hill's mangabey;Lophocebus osmani
+Cercopithecinae;Rungwecebus;Kipunji;Rungwecebus kipunji
+Cercopithecinae;Papio;Hamadryas baboon;Papio hamadryas
+Cercopithecinae;Papio;Guinea baboon;Papio papio
+Cercopithecinae;Papio;olive baboon;Papio anubis
+Cercopithecinae;Papio;yellow baboon;Papio cynocephalus
+Cercopithecinae;Papio;Chacma baboon;Papio ursinus
+Cercopithecinae;Theropithecus;gelada;Theropithecus gelada
+Cercopithecinae;Cercocebus;sooty mangabey;Cercocebus atys
+Cercopithecinae;Cercocebus;collared mangabey;Cercocebus torquatus
+Cercopithecinae;Cercocebus;agile mangabey;Cercocebus agilis
+Cercopithecinae;Cercocebus;golden-bellied mangabey;Cercocebus chrysogaster
+Cercopithecinae;Cercocebus;Tana River mangabey;Cercocebus galeritus
+Cercopithecinae;Cercocebus;Sanje mangabey;Cercocebus sanjei
+Cercopithecinae;Mandrillus;mandrill;Mandrillus sphinx
+Cercopithecinae;Mandrillus;drill;Mandrillus leucophaeus
+Colobinae;Colobus;black colobus;Colobus satanas
+Colobinae;Colobus;Angola colobus;Colobus angolensis
+Colobinae;Colobus;king colobus;Colobus polykomos
+Colobinae;Colobus;ursine colobus;Colobus vellerosus
+Colobinae;Colobus;mantled guereza;Colobus guereza
+Colobinae;Procolobus;western red colobus;Procolobus badius
+Colobinae;Procolobus;Pennant's colobus;Procolobus pennantii
+Colobinae;Procolobus;Preuss's red colobus;Procolobus preussi
+Colobinae;Procolobus;Thollon's red colobus;Procolobus tholloni
+Colobinae;Procolobus;Central African red colobus;Procolobus foai
+Colobinae;Procolobus;Ugandan red colobus;Procolobus tephrosceles
+Colobinae;Procolobus;Udzungwa red colobus;Procolobus gordonorum
+Colobinae;Procolobus;Zanzibar red colobus;Procolobus kirkii
+Colobinae;Procolobus;Tana River red colobus;Procolobus rufomitratus
+Colobinae;Procolobus;olive colobus;Procolobus verus
+Colobinae;Semnopithecus;Nepal gray langur;Semnopithecus schistaceus
+Colobinae;Semnopithecus;Kashmir gray langur;Semnopithecus ajax
+Colobinae;Semnopithecus;Tarai gray langur;Semnopithecus hector
+Colobinae;Semnopithecus;northern plains gray langur;Semnopithecus entellus
+Colobinae;Semnopithecus;black-footed gray langur;Semnopithecus hypoleucos
+Colobinae;Semnopithecus;southern plains gray langur;Semnopithecus dussumieri
+Colobinae;Semnopithecus;tufted gray langur;Semnopithecus priam
+Colobinae;Trachypithecus;purple-faced langur;Trachypithecus vetulus
+Colobinae;Trachypithecus;Nilgiri langur;Trachypithecus johnii
+Colobinae;Trachypithecus;Javan lutung;Trachypithecus auratus
+Colobinae;Trachypithecus;silvery lutung or silvered leaf monkey;Trachypithecus cristatus
+Colobinae;Trachypithecus;Indochinese lutung;Trachypithecus germaini
+Colobinae;Trachypithecus;Tenasserim lutung;Trachypithecus barbei
+Colobinae;Trachypithecus;dusky leaf monkey or spectacled leaf monkey;Trachypithecus obscurus
+Colobinae;Trachypithecus;Phayre's leaf monkey;Trachypithecus phayrei
+Colobinae;Trachypithecus;capped langur;Trachypithecus pileatus
+Colobinae;Trachypithecus;Shortridge's langur;Trachypithecus shortridgei
+Colobinae;Trachypithecus;Gee's golden langur;Trachypithecus geei
+Colobinae;Trachypithecus;Francois' langur;Trachypithecus francoisi
+Colobinae;Trachypithecus;Hatinh langur;Trachypithecus hatinhensis
+Colobinae;Trachypithecus;white-headed langur;Trachypithecus poliocephalus
+Colobinae;Trachypithecus;Laotian langur;Trachypithecus laotum
+Colobinae;Trachypithecus;Delacour's langur;Trachypithecus delacouri
+Colobinae;Trachypithecus;Indochinese black langur;Trachypithecus ebenus
+Colobinae;Presbytis;Sumatran surili;Presbytis melalophos
+Colobinae;Presbytis;banded surili;Presbytis femoralis
+Colobinae;Presbytis;Sarawak surili;Presbytis chrysomelas
+Colobinae;Presbytis;white-thighed surili;Presbytis siamensis
+Colobinae;Presbytis;white-fronted surili;Presbytis frontata
+Colobinae;Presbytis;Javan surili;Presbytis comata
+Colobinae;Presbytis;Thomas's langur;Presbytis thomasi
+Colobinae;Presbytis;Hose's langur;Presbytis hosei
+Colobinae;Presbytis;maroon leaf monkey;Presbytis rubicunda
+Colobinae;Presbytis;Mentawai langur or joja;Presbytis potenziani
+Colobinae;Presbytis;Natuna Island surili;Presbytis natunae
+Colobinae;Pygathrix;red-shanked douc;Pygathrix nemaeus
+Colobinae;Pygathrix;black-shanked douc;Pygathrix nigripes
+Colobinae;Pygathrix;gray-shanked douc;Pygathrix cinerea
+Colobinae;Rhinopithecus;golden snub-nosed monkey;Rhinopithecus roxellana
+Colobinae;Rhinopithecus;black snub-nosed monkey;Rhinopithecus bieti
+Colobinae;Rhinopithecus;gray snub-nosed monkey;Rhinopithecus brelichi
+Colobinae;Rhinopithecus;Myanmar snub-nosed monkey;Rhinopithecus strykeri
+Colobinae;Rhinopithecus;Tonkin snub-nosed langur;Rhinopithecus avunculus
+Colobinae;Nasalis;proboscis monkey;Nasalis larvatus
+Colobinae;Simias;pig-tailed langur;Simias concolor
+Hylobatidae;Hylobates;Lar gibbon or white-handed gibbon;Hylobates lar
+Hylobatidae;Hylobates;agile gibbon or black-handed gibbon;Hylobates agilis
+Hylobatidae;Hylobates;Müller's Bornean gibbon;Hylobates muelleri
+Hylobatidae;Hylobates;silvery gibbon;Hylobates moloch
+Hylobatidae;Hylobates;pileated gibbon or capped gibbon;Hylobates pileatus
+Hylobatidae;Hylobates;Kloss's gibbon or Mentawai gibbon or bilou;Hylobates klossii
+Hylobatidae;Hoolock;western hoolock gibbon;Hoolock hoolock
+Hylobatidae;Hoolock;eastern hoolock gibbon;Hoolock leuconedys
+Hylobatidae;Symphalangus;Siamang;Symphalangus syndactylus
+Hylobatidae;Nomascus;Concolor or black crested gibbon;Nomascus concolor
+Hylobatidae;Nomascus;eastern black crested gibbon;Nomascus nasutus
+Hylobatidae;Nomascus;northern white-cheeked gibbon;Nomascus leucogenys
+Hylobatidae;Nomascus;yellow-cheeked gibbon;Nomascus gabriellae
+Hominidae;Pongo;Bornean orangutan;Pongo pygmaeus
+Hominidae;Pongo;Sumatran orangutan;Pongo abelii
+Hominidae;Gorilla;western gorilla;Gorilla gorilla
+Hominidae;Gorilla;eastern gorilla;Gorilla beringei
+Hominidae;Pan;common chimpanzee;Pan troglodytes
+Hominidae;Pan;bonobo or pygmy chimpanzee;Pan paniscus
+Hominidae;Homo;human;Homo sapiens

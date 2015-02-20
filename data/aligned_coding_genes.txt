@@ -1,0 +1,17 @@
+ADORA3.fa
+AXIN1.fa
+BCHE.fa
+BCOR.fa
+BDNF.fa
+BRCA2.fa
+CNR1.fa
+EDG1.fa
+PNOC.fa
+RAG1.fa
+RAG2.fa
+RPGRIP1.fa
+SRY.fa
+TEX2.fa
+TYR.fa
+UTY.fa
+ZIC3.fa
