@@ -38,7 +38,8 @@ Main = function(x){
        c("GC.All", "GC.Var", "Mouse.All", "Mouse.Var", "PerGene.All", "PerGene.Var"))
   
   for (i in 1:length(x)){
-    gene = processFile(paste("../data/aligned_coding_genes/", x[i], sep=""))
+   # gene = processFile(paste("../data/aligned_coding_genes/", x[i], sep=""))
+    gene = processFile("../data/aligned_coding_genes/EDG1.fa")
     gc = gcContent3(gene$dna)
     
     codonFreqGC = gcCodonUsage(gc)  ## Third position GC content per gene as the expected distribution
@@ -64,7 +65,7 @@ Main = function(x){
 
 #Calculate entropy and generate null distribution
 CalculateEntropy = function(x, y, z){
-  #  sdList = c()
+
   mat = matrix(0, nrow=speciesSamplesPerGene, ncol=3, 
     dimnames=list(paste("Trial",1:speciesSamplesPerGene), c("Observed", "Expected", "StdDev")))
   mat2 = matrix(0, nrow=speciesSamplesPerGene, ncol=3, 
@@ -75,14 +76,15 @@ CalculateEntropy = function(x, y, z){
     h = synonymousSites1(x, y[i, ]) ## Includes conserved AA positions using the same codon
     h2 = synonymousSites2(x, y[i, ])  ## Excludes conserved AA positions with the same codon
     
-#     if (i == 1){  ##Uncomment this if loop (along with other code) to output concatenated nucleotide seq
-#       toOutput(x, y[i,],h)
-#     }
+    if (seqs == 1){
+      if (i == 1){
+        toOutput(x, y[i,],h)
+      }
+    }
 
     if (length(h) > 0){
       e = usage(x, h, y[i, ])
       f = generateUsage(nullTrials, x, h, y[i,], z) ##GC content, mouse, or per gene codon usage
-      #f = generateUsage2(nullTrials, x, h, y[i,])
       mat[i,1] = e
       mat[i,2] = mean(f)
       mat[i,3] = var(f)
@@ -91,7 +93,6 @@ CalculateEntropy = function(x, y, z){
     if (length(h2) > 0){
       e2 = usage(x, h2, y[, ])
       f2 = generateUsage(nullTrials, x, h2, y[i,], z) ##GC content, mouse, or per gene codon usage
-      #f = generateUsage2(nullTrials, x, h, y[i,])
       mat2[i,1] = e2      
       mat2[i,2] = mean(f2)
       mat2[i,3] = var(f2)
@@ -121,23 +122,28 @@ primates = read.table("../data/primate-species-16fam.csv",header=T,sep=";",quote
 # Code to change sequence of coding dna into sequence of amino acids
 dnaToAA = function(x) {
     n = length(x)
+    
     if ( n %% 3 != 0 ) {
         stop("length of sequence not a multiple of three")
     }
+    
     m = n %/% 3
     aa = character(m)
     index = 1
-    for ( i in 1:m ) {
+  
+    for (i in 1:m) {
         foo = tolower(x[index:(index+2)])
-        if ( any(foo == '-') )
+        
+        if (any(foo == '-')){
             aa[i] = '-'
-        else if ( !all(foo %in% c('a','c','g','t')) )
+        } else if (!all(foo %in% c('a','c','g','t'))){
             aa[i] = '-'
-        else
-            aa[i] = codonToAAone(paste(x[index],x[index+1],x[index+2],sep=""))
-        index = index + 3
+        } else {
+          aa[i] = codonToAAone(paste(x[index],x[index+1],x[index+2],sep=""))
+          index = index + 3
+        }
     }
-    return( aa )
+    return(aa)
 }
 
 # Function to remove first word from a string: here, get genus from species name
@@ -354,40 +360,7 @@ geneCodonUsage = function(gene){
   return(output)
 }
 
-
-# Calculate codon frequencies based on observed frequencies per gene per species
-speciesCodonUsage = function(gene, taxon){
-  counts = hash()
-  output = hash()
-  
-  for (i in 1:length(codons$codon)){
-    output[[codons$codon[i]]] = 0
-    counts[[codons$codon[i]]] = 0
-  }
-  for (i in 1:length(gene$aa[taxon,])){
-    startPos = (i*3)-2
-    codon = toupper(paste(gene$dna[taxon, startPos:(startPos+2)], sep='', collapse=''))
-      if (has.key(codon, counts)){
-        counts[[codon]] = counts[[codon]] + 1
-      }
-    }  
-
-  for (i in 1:length(keys(counts))){
-    c = keys(counts)[i]
-    a = codonToAAone(c)
-    if (a == "Stop"){
-      a = "X"
-    }
-    s = 0
-    for (j in 1:length(codonTable[[a]])){
-      s = s + counts[[codonTable[[a]][j]]]
-    }
-    output[[c]] = counts[[c]] / s
-  }
-  return(output)
-}
-
-# Function to create a hash table of frequency for each codon position
+# Create a hash table of frequency for each codon position
 cHash = function(x){
   a <- hash()
   for (i in 1:length(x)){
@@ -412,30 +385,6 @@ generateUsage = function(B, x, y, z, cuf){
   n = rowSums(m)
   return(n)
 }
-
-# Generate the summed entropy from B samples of a gene given a null distribution of codon usage
-generateUsage2 = function(B, gene, synSites, taxa){
-  m = matrix(nrow=B, ncol=length(synSites))
-  for (i in 1:length(synSites)){
-    aa = gene$aa[taxa[1], synSites[i]]
-    cList = codonTable[[aa]]
-    
-    for (j in 1:length(taxa)){
-      specUsage = speciesCodonUsage(gene, taxa[j])
-      pdist = c()
-      for (n in 1:length(cList)){
-        pdist = c(pdist, specUsage[[cList[n]]])
-      }
-      for (k in 1:B){
-        
-      }
-    }   
-    m[,i] = null.sample(B, length(z), pdist)
-  }
-  n = rowSums(m)
-  return(n)
-}
-
 
 # Function to compute the entropy statistics over a vector y of synonymous sites
 usage = function(x, y, z){
@@ -514,26 +463,25 @@ seqGenerator = function(){
   close(g)
 }
 
-
-#The following block is only relevant if sequences are to be output.
-fastOut = hash()
-aaOut = hash()
-for (i in 1:length(levels(primates$Family))){
-  fastOut[[(levels(primates$Family)[i])]] = ''
-  aaOut[[(levels(primates$Family)[i])]] = ''
-}
-
-
 #Read in the gene names. The file "genes.txt" must be present in the working directory
-genes = scan("../data/aligned_coding_genes.txt", what='')
+genes = scan("../../a1.txt", what='')
 
 final = Main(genes)
 #print(final)
-write.table(final[]$GC.All, file="../results/GC.All.txt", quote = FALSE, row.names = TRUE, col.names = TRUE)
-write.table(final[]$GC.Var, file="../results/GC.Var.txt", quote = FALSE, row.names = TRUE, col.names = TRUE)
-write.table(final[]$Mouse.All, file="../results/Mouse.All.txt", quote = FALSE, row.names = TRUE, col.names = TRUE)
-write.table(final[]$Mouse.Var, file="../results/Mouse.Var.txt", quote = FALSE, row.names = TRUE, col.names = TRUE)
-write.table(final[]$PerGene.All, file="../results/PerGene.All.txt", quote = FALSE, row.names = TRUE, col.names = TRUE)
-write.table(final[]$PerGene.Var, file="../results/PerGene.Var.txt", quote = FALSE, row.names = TRUE, col.names = TRUE)
+write.table(final[]$GC.All, file = "../results/GC.All.txt", quote = FALSE, row.names = TRUE, col.names = NA)
+write.table(final[]$GC.Var, file = "../results/GC.Var.txt", quote = FALSE, row.names = TRUE, col.names = NA)
+write.table(final[]$Mouse.All, file = "../results/Mouse.All.txt", quote = FALSE, row.names = TRUE, col.names = NA)
+write.table(final[]$Mouse.Var, file = "../results/Mouse.Var.txt", quote = FALSE, row.names = TRUE, col.names = NA)
+write.table(final[]$PerGene.All, file = "../results/PerGene.All.txt", quote = FALSE, row.names = TRUE, col.names = NA)
+write.table(final[]$PerGene.Var, file = "../results/PerGene.Var.txt", quote = FALSE, row.names = TRUE, col.names = NA)
 
-#seqGenerator() ##Uncomment this, along with an if statement in the "CalculateEntropy" function, to output concatenated sequences
+if (seqs == 1){
+  fastOut = hash()
+  aaOut = hash()
+  
+  for (i in 1:length(levels(primates$Family))){
+    fastOut[[(levels(primates$Family)[i])]] = ''
+    aaOut[[(levels(primates$Family)[i])]] = ''
+  }
+  seqGenerator()
+}
