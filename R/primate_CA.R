@@ -34,12 +34,11 @@ seqs = 0
 Main = function(x){
   
   L <- setNames(replicate(6, matrix(0, nrow=speciesSamplesPerGene, ncol=3, 
-       dimnames=list(paste("Trial",1:speciesSamplesPerGene), c("Observed", "Expected", "StdDev"))), simplify=FALSE), 
+       dimnames=list(paste("Trial",1:speciesSamplesPerGene), c("Observed", "Expected", "Var"))), simplify=FALSE), 
        c("GC.All", "GC.Var", "Mouse.All", "Mouse.Var", "PerGene.All", "PerGene.Var"))
   
   for (i in 1:length(x)){
-   # gene = processFile(paste("../data/aligned_coding_genes/", x[i], sep=""))
-    gene = processFile("../data/aligned_coding_genes/EDG1.fa")
+    gene = processFile(paste("../data/aligned_coding_genes/", x[i], sep=""))
     gc = gcContent3(gene$dna)
     
     codonFreqGC = gcCodonUsage(gc)  ## Third position GC content per gene as the expected distribution
@@ -47,7 +46,7 @@ Main = function(x){
     codonFreqGene = geneCodonUsage(gene) ## Per-gene codon usage distribution as the expected
     
     taxa = sampleSpecies(speciesSamplesPerGene, gene)
-    
+
     a = CalculateEntropy(gene, taxa, codonFreqGC)
     b = CalculateEntropy(gene, taxa, codonFreqMouse)
     c = CalculateEntropy(gene, taxa, codonFreqGene)
@@ -67,10 +66,9 @@ Main = function(x){
 CalculateEntropy = function(x, y, z){
 
   mat = matrix(0, nrow=speciesSamplesPerGene, ncol=3, 
-    dimnames=list(paste("Trial",1:speciesSamplesPerGene), c("Observed", "Expected", "StdDev")))
+    dimnames=list(paste("Trial",1:speciesSamplesPerGene), c("Observed", "Expected", "Var")))
   mat2 = matrix(0, nrow=speciesSamplesPerGene, ncol=3, 
-    dimnames=list(paste("Trial",1:speciesSamplesPerGene), c("Observed", "Expected", "StdDev")))
-
+    dimnames=list(paste("Trial",1:speciesSamplesPerGene), c("Observed", "Expected", "Var")))
   
   for (i in 1:length(y[,1])){
     h = synonymousSites1(x, y[i, ]) ## Includes conserved AA positions using the same codon
@@ -140,18 +138,18 @@ dnaToAA = function(x) {
             aa[i] = '-'
         } else {
           aa[i] = codonToAAone(paste(x[index],x[index+1],x[index+2],sep=""))
-          index = index + 3
         }
+      index = index + 3  
     }
     return(aa)
 }
 
-# Function to remove first word from a string: here, get genus from species name
+# Remove first word from a string: here, get genus from species name
 getGenus = function(x) {
     return( strsplit(x," ")[[1]][1] )
 }
 
-# Function to get family from genus using the information in primates
+# Get family from genus using the information in primates
 getFamily = function(genus) {
     return( as.character(primates$Family[which(primates$Genus == genus)[1]]) )
 }
@@ -235,7 +233,7 @@ sampleSpecies = function(B,x) {
 }
 
 
-# Function to return a vector of indices of synonymous aa sites from a group of taxa (including all same codon)
+# Return a vector of indices of synonymous aa sites from a group of taxa (including all same codon)
 synonymousSites1 = function(x, s) {
   synSites = vector()
   for (i in 1:length(x$aa[1,])){
@@ -243,12 +241,12 @@ synonymousSites1 = function(x, s) {
     for (k in 1:length(s)){
       residue[k] = x$aa[s[k],i]
     }
+
     if (all(residue[1] == residue) && (residue[1] != "W") && (residue[1] != "M") && (residue[1] != "-"))
       synSites <- c(synSites, i)
   }
   return(synSites)
 }
-
 
 # Function to return a vector of indices of synonymous aa sites from a group of taxa (exclude all exact same codons)
 synonymousSites2 = function(x, s) {
@@ -464,7 +462,7 @@ seqGenerator = function(){
 }
 
 #Read in the gene names. The file "genes.txt" must be present in the working directory
-genes = scan("../../a1.txt", what='')
+genes = scan("../data/aligned_coding_genes.txt", what='')
 
 final = Main(genes)
 #print(final)
