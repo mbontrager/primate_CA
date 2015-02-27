@@ -413,7 +413,7 @@ usage = function(x, y, z){
 }
 
 
-# Generate a concatenated sequence of variable codons within conserved amino acids. Must uncomment a bunch of other stuff.
+# Generate a concatenated sequence of variable codons within conserved amino acids.
 toOutput = function(gene, taxa, syn){
   nonSyn = setdiff(1:length(gene$aa[1,]), syn)
   a = setdiff(levels(primates$Family), levels(gene$family))
@@ -447,7 +447,6 @@ toOutput = function(gene, taxa, syn){
   }
 }
 
-
 seqGenerator = function(){
   f = file("Output.fa", "w")
   g = file("aaOutput.aln", "w")
@@ -465,7 +464,7 @@ seqGenerator = function(){
 genes = scan("../data/aligned_coding_genes.txt", what='')
 
 final = Main(genes)
-#print(final)
+
 write.table(final[]$GC.All, file = "../results/GC.All.txt", quote = FALSE, row.names = TRUE, col.names = NA)
 write.table(final[]$GC.Var, file = "../results/GC.Var.txt", quote = FALSE, row.names = TRUE, col.names = NA)
 write.table(final[]$Mouse.All, file = "../results/Mouse.All.txt", quote = FALSE, row.names = TRUE, col.names = NA)
