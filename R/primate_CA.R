@@ -21,7 +21,7 @@ PkgTest("hash")
 PkgTest("RGenetics")
 
 #Set the random number seed for reproducibility
-set.seed(434995235)
+set.seed(353204)
 
 # Number of trials (samples of entropy per gene from the expected distribution) and species sampled.
 speciesSamplesPerGene = 50
@@ -38,6 +38,7 @@ Main = function(x){
        c("GC.All", "GC.Var", "Mouse.All", "Mouse.Var", "PerGene.All", "PerGene.Var"))
   
   for (i in 1:length(x)){
+    
     gene = processFile(paste("../data/aligned_coding_genes/", x[i], sep=""))
     gc = gcContent3(gene$dna)
     
@@ -82,15 +83,15 @@ CalculateEntropy = function(x, y, z){
 
     if (length(h) > 0){
       e = usage(x, h, y[i, ])
-      f = generateUsage(nullTrials, x, h, y[i,], z) ##GC content, mouse, or per gene codon usage
+      f = generateUsage(nullTrials, x, h, y[i, ], z)
       mat[i,1] = e
       mat[i,2] = mean(f)
       mat[i,3] = var(f)
     }
 
     if (length(h2) > 0){
-      e2 = usage(x, h2, y[, ])
-      f2 = generateUsage(nullTrials, x, h2, y[i,], z) ##GC content, mouse, or per gene codon usage
+      e2 = usage(x, h2, y[i, ])
+      f2 = generateUsage(nullTrials, x, h2, y[i,], z)
       mat2[i,1] = e2      
       mat2[i,2] = mean(f2)
       mat2[i,3] = var(f2)
@@ -127,19 +128,17 @@ dnaToAA = function(x) {
     
     m = n %/% 3
     aa = character(m)
-    index = 1
   
     for (i in 1:m) {
-        foo = tolower(x[index:(index+2)])
-        
+        foo = tolower(x[((i*3)-2):(i*3)])
+
         if (any(foo == '-')){
             aa[i] = '-'
         } else if (!all(foo %in% c('a','c','g','t'))){
             aa[i] = '-'
         } else {
-          aa[i] = codonToAAone(paste(x[index],x[index+1],x[index+2],sep=""))
-        }
-      index = index + 3  
+          aa[i] = codonToAAone(paste(x[(i*3)-2],x[(i*3)-1],x[i*3],sep=""))
+        } 
     }
     return(aa)
 }
@@ -460,7 +459,7 @@ seqGenerator = function(){
   close(g)
 }
 
-#Read in the gene names. The file "genes.txt" must be present in the working directory
+#Read in the gene names. "aligned_coding_genes.txt" must be present in the working directory
 genes = scan("../data/aligned_coding_genes.txt", what='')
 
 final = Main(genes)
