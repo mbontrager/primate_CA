@@ -464,12 +464,12 @@ genes = scan("../data/aligned_coding_genes.txt", what='')
 
 final = Main(genes)
 
-write.table(final[]$GC.All, file = "../results/GC.All.txt", quote = FALSE, row.names = TRUE, col.names = NA)
-write.table(final[]$GC.Var, file = "../results/GC.Var.txt", quote = FALSE, row.names = TRUE, col.names = NA)
-write.table(final[]$Mouse.All, file = "../results/Mouse.All.txt", quote = FALSE, row.names = TRUE, col.names = NA)
-write.table(final[]$Mouse.Var, file = "../results/Mouse.Var.txt", quote = FALSE, row.names = TRUE, col.names = NA)
-write.table(final[]$PerGene.All, file = "../results/PerGene.All.txt", quote = FALSE, row.names = TRUE, col.names = NA)
-write.table(final[]$PerGene.Var, file = "../results/PerGene.Var.txt", quote = FALSE, row.names = TRUE, col.names = NA)
+write.table(final[]$GC.All, file = "../results/GC.All.txt", quote = FALSE, row.names = FALSE, col.names = FALSE)
+write.table(final[]$GC.Var, file = "../results/GC.Var.txt", quote = FALSE, row.names = FALSE, col.names = FALSE)
+write.table(final[]$Mouse.All, file = "../results/Mouse.All.txt", quote = FALSE, row.names = FALSE, col.names = FALSE)
+write.table(final[]$Mouse.Var, file = "../results/Mouse.Var.txt", quote = FALSE, row.names = FALSE, col.names = FALSE)
+write.table(final[]$PerGene.All, file = "../results/PerGene.All.txt", quote = FALSE, row.names = FALSE, col.names = FALSE)
+write.table(final[]$PerGene.Var, file = "../results/PerGene.Var.txt", quote = FALSE, row.names = FALSE, col.names = FALSE)
 
 if (seqs == 1){
   fastOut = hash()
