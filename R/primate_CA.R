@@ -28,7 +28,7 @@ speciesSamplesPerGene = 50
 nullTrials = 100
 
 #Generate Sequences (1 = yes, 0 = no)
-seqs = 0
+seqs = 1
 
 # Reads in a list of filenames with aligned nucleotide sequences (starting and ending at coding positions)
 Main = function(x){
@@ -447,8 +447,8 @@ toOutput = function(gene, taxa, syn){
 }
 
 seqGenerator = function(){
-  f = file("Output.fa", "w")
-  g = file("aaOutput.aln", "w")
+  f = file("../results/degen_pos_output.fa", "w")
+  g = file("../results/aaOutput.aln", "w")
   for (i in 1:length(keys(fastOut))){
     fastOut[[keys(fastOut)[i]]] = paste(fastOut[[keys(fastOut)[i]]], collapse='')
     aaOut[[keys(fastOut)[i]]] = paste(aaOut[[keys(fastOut)[i]]], collapse='')

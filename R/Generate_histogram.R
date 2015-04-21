@@ -1,5 +1,9 @@
 # Generate pretty graphs from Codon usage test data
 
+#Set the working directory to the directory in which the script is run.
+this.dir <- dirname(parent.frame(2)$ofile)
+setwd(this.dir)
+
 #Load and/or install require packages.
 PkgTest <- function(x)
 {
@@ -13,7 +17,6 @@ PkgTest <- function(x)
 PkgTest("ggplot2")
 PkgTest("reshape2")
 
-files = list.files(path = "../results/", pattern = "\\.txt$")
 setwd("../results/")
 
 histogramPlot = function(file){
@@ -32,14 +35,15 @@ histogramPlot = function(file){
   plot1
   
   # Melt and cast the data for graphing purposes
-  a$variance = NULL
+  #a$variance = NULL
   c = melt(a, measured=c("observed", "expectedMean"))
   colnames(c) = c("Distribution", "Entropy")
   
   plot2 <- ggplot(c, aes(x=Entropy, fill=Distribution)) + geom_histogram(binwidth=15)+ theme(plot.title = element_text(lineheight=.8, face="bold")) + scale_fill_manual(values=c("purple", "aquamarine4"))
   plot2
 }
+histogramPlot("GC.All.txt")
 
-for (i in 1:length(files)){
-  histogramPlot(files[i])
-}
+# for (i in 1:length(files)){
+#   histogramPlot(files[i])
+# }
