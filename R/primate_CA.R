@@ -405,6 +405,8 @@ usage = function(x, y, z){
     e = c()
     for (l in 1:length(d)){
       e = c(e, b[[d[l]]])
+      print(e)
+      print(entropy(e))
     }
     entropyList = c(entropyList, entropy(e))    
   }
@@ -462,15 +464,6 @@ seqGenerator = function(){
 #Read in the gene names. "aligned_coding_genes.txt" must be present in the working directory
 genes = scan("../data/aligned_coding_genes.txt", what='')
 
-final = Main(genes)
-
-write.table(final[]$GC.All, file = "../results/GC.All.txt", quote = FALSE, row.names = FALSE, col.names = FALSE)
-write.table(final[]$GC.Var, file = "../results/GC.Var.txt", quote = FALSE, row.names = FALSE, col.names = FALSE)
-write.table(final[]$Mouse.All, file = "../results/Mouse.All.txt", quote = FALSE, row.names = FALSE, col.names = FALSE)
-write.table(final[]$Mouse.Var, file = "../results/Mouse.Var.txt", quote = FALSE, row.names = FALSE, col.names = FALSE)
-write.table(final[]$PerGene.All, file = "../results/PerGene.All.txt", quote = FALSE, row.names = FALSE, col.names = FALSE)
-write.table(final[]$PerGene.Var, file = "../results/PerGene.Var.txt", quote = FALSE, row.names = FALSE, col.names = FALSE)
-
 if (seqs == 1){
   fastOut = hash()
   aaOut = hash()
@@ -479,5 +472,17 @@ if (seqs == 1){
     fastOut[[(levels(primates$Family)[i])]] = ''
     aaOut[[(levels(primates$Family)[i])]] = ''
   }
-  seqGenerator()
 }
+
+final = Main(genes)
+
+if (seqs == 1){
+    seqGenerator()
+}
+
+write.table(final[]$GC.All, file = "../results/GC.All.txt", quote = FALSE, row.names = FALSE, col.names = FALSE)
+write.table(final[]$GC.Var, file = "../results/GC.Var.txt", quote = FALSE, row.names = FALSE, col.names = FALSE)
+write.table(final[]$Mouse.All, file = "../results/Mouse.All.txt", quote = FALSE, row.names = FALSE, col.names = FALSE)
+write.table(final[]$Mouse.Var, file = "../results/Mouse.Var.txt", quote = FALSE, row.names = FALSE, col.names = FALSE)
+write.table(final[]$PerGene.All, file = "../results/PerGene.All.txt", quote = FALSE, row.names = FALSE, col.names = FALSE)
+write.table(final[]$PerGene.Var, file = "../results/PerGene.Var.txt", quote = FALSE, row.names = FALSE, col.names = FALSE)
