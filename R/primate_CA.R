@@ -24,18 +24,21 @@ PkgTest("RGenetics")
 set.seed(353204)
 
 # Number of trials (samples of entropy per gene from the expected distribution) and species sampled.
-speciesSamplesPerGene = 50
-nullTrials = 100
+speciesSamplesPerGene <- 50
+nullTrials <- 100
 
 #Generate Sequences (1 = yes, 0 = no)
-seqs = 1
+seqs <- 1
 
 # Reads in a list of filenames with aligned nucleotide sequences (starting and ending at coding positions)
-Main = function(x){
+Main <- function(x){
   
-  L <- setNames(replicate(6, matrix(0, nrow=speciesSamplesPerGene, ncol=3, 
-       dimnames=list(paste("Trial",1:speciesSamplesPerGene), c("Observed", "Expected", "Var"))), simplify=FALSE), 
-       c("GC.All", "GC.Var", "Mouse.All", "Mouse.Var", "PerGene.All", "PerGene.Var"))
+  labels <- c("GC.All", "GC.Var", "Mouse.All", "Mouse.Var", "PerGene.All", 
+              "PerGene.Var")
+  
+  L <- setNames(replicate(6, matrix(0, nrow = speciesSamplesPerGene, ncol = 3, 
+        dimnames = list(paste("Trial",1:speciesSamplesPerGene), 
+        c("Observed", "Expected", "Var"))), simplify=FALSE), labels)
   
   for (i in 1:length(x)){
     
