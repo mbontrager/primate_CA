@@ -1,34 +1,60 @@
-# Bret Larget
 # Martin Bontrager
+# Bret Larget
+# Testing Common Ancestry at the "Family" level in primates.
 
-#Set the working directory to the directory in which the script is run.
+# This script takes input in the form of a list of fasta files aligned 
+# in the correct reading frame, a mouse whole-genome codon usage table, the
+# codon translation, and a large list of primate species (which match headers
+# in the alignments). It returns a table with `repsPerGene` draws of the family
+# representative. For each n in `repsPerGene` it calculates the observed 
+# entropy, and draws `trials` times from three different codon usage 
+# distributions to generate a mean expected entropy statistic under that model.
+# We also return the mean expected entropy stat if wholly conserved positions 
+# are excluded. Variance around expected entropy is also returned. 
+
+library("ape")
+library("hash")
+library("RGenetics")
+
+# Set the working directory to the directory in which the script is run.
 this.dir <- dirname(parent.frame(2)$ofile)
 setwd(this.dir)
 
-#Load and/or install require packages.
-PkgTest <- function(x)
-{
-  if (!require(x,character.only = TRUE))
-  {
-    install.packages(x,dep = TRUE)
-    if(!require(x, character.only = TRUE)) stop("Package not found")
-  }
+repsPerGene <- 50   #Number of spcecies draws to be family representatives
+trials <- 100       #Draws from the expected codon usage distribution
+set.seed(353204)
+genSeqs <- FALSE    #If `TRUE` will output aa and nucleotide seqs
+
+# Primate Family,Genus,Species table.
+primates <- read.table("../data/primate-species-16fam.csv", header = T, 
+                       sep = ";", quote = "")
+
+# List of aligned fasta files to be included
+genes <- scan("../data/test_genes.txt", what = '')
+
+# Read codon table and create a hash table with aa,[codons] key,value pairs
+codons <- read.table("../data/codon_table.txt", header = T, sep = "", 
+                     as.is = c(1,2))
+codonTable <- hash()
+for (i in 1:length(codons$codon)){
+    if (all(has.key(codons$aa[i], codonTable))){
+        codonTable[[codons$aa[i]]] <- append(codonTable[[codons$aa[i]]], 
+                                             codons$codon[i])
+    }
+    else {
+        codonTable[[codons$aa[i]]] <- codons$codon[i]
+    } 
 }
 
-# Load libraries
-PkgTest("ape")
-PkgTest("hash")
-PkgTest("RGenetics")
-
-#Set the random number seed for reproducibility
-set.seed(353204)
-
-# Number of trials (samples of entropy per gene from the expected distribution) and species sampled.
-speciesSamplesPerGene <- 50
-nullTrials <- 100
-
-#Generate Sequences (1 = yes, 0 = no)
-seqs <- 1
+# Generate mouse genome-wide codon usage frequency hash table
+mouseUsage <- function(){
+    codons <- read.table("../data/use_mouse.txt", header = T, sep = "", as.is = 1)
+    codonUsageFreq <- hash()
+    for (i in 1:length(codons$codon)){
+        codonUsageFreq[[codons$codon[i]]] <- codons$freq[i]
+    }
+    return(codonUsageFreq)
+}
 
 # Reads in a list of filenames with aligned nucleotide sequences (starting and ending at coding positions)
 Main <- function(x){
@@ -36,20 +62,20 @@ Main <- function(x){
   labels <- c("GC.All", "GC.Var", "Mouse.All", "Mouse.Var", "PerGene.All", 
               "PerGene.Var")
   
-  L <- setNames(replicate(6, matrix(0, nrow = speciesSamplesPerGene, ncol = 3, 
-        dimnames = list(paste("Trial",1:speciesSamplesPerGene), 
-        c("Observed", "Expected", "Var"))), simplify=FALSE), labels)
+  L <- setNames(replicate(6, matrix(0, nrow = repsPerGene, ncol = 3, 
+        dimnames <- list(paste("Trial",1:repsPerGene), 
+        c("Observed", "Expected", "Var"))), simplify = FALSE), labels)
   
   for (i in 1:length(x)){
     
     gene <- processFile(paste("../data/aligned_coding_genes/", x[i], sep=""))
-    gc <- gcContent3(gene$dna)
+    gc <- ThirdPosGCContent(gene$dna)
     
     codonFreqGC <- gcCodonUsage(gc)  ## Third position GC content per gene as the expected distribution
     codonFreqMouse <- mouseUsage()  ## Mouse genome-wide codon usage as the expected
     codonFreqGene <- geneCodonUsage(gene) ## Per-gene codon usage distribution as the expected
     
-    taxa <- sampleSpecies(speciesSamplesPerGene, gene)
+    taxa <- sampleSpecies(repsPerGene, gene)
 
     a <- CalculateEntropy(gene, taxa, codonFreqGC)
     b <- CalculateEntropy(gene, taxa, codonFreqMouse)
@@ -65,22 +91,21 @@ Main <- function(x){
   return(L)
 }
 
-
 #Calculate entropy and generate null distribution
 CalculateEntropy <- function(x, y, z){
 
-  mat <- matrix(0, nrow = speciesSamplesPerGene, ncol = 3, 
-    dimnames = list(paste("Trial",1:speciesSamplesPerGene), 
+  mat <- matrix(0, nrow = repsPerGene, ncol = 3, 
+    dimnames = list(paste("Trial",1:repsPerGene), 
     c("Observed", "Expected", "Var")))
-  mat2 <- matrix(0, nrow = speciesSamplesPerGene, ncol = 3, 
-    dimnames = list(paste("Trial",1:speciesSamplesPerGene), 
+  mat2 <- matrix(0, nrow = repsPerGene, ncol = 3, 
+    dimnames = list(paste("Trial",1:repsPerGene), 
     c("Observed", "Expected", "Var")))
   
   for (i in 1:length(y[,1])){
-    h <- synonymousSites1(x, y[i, ]) ## Includes fully conserved codons
-    h2 <- synonymousSites2(x, y[i, ])  ## Excludes fully conserved codons
+    h <- AllSynonymousSites(x, y[i, ]) ## Includes fully conserved codons
+    h2 <- VariableSynonymousSites(x, y[i, ])  ## Excludes fully conserved codons
     
-    if (seqs == 1){
+    if (genSeqs){
       if (i == 1){
         toOutput(x, y[i,],h)
       }
@@ -88,7 +113,7 @@ CalculateEntropy <- function(x, y, z){
 
     if (length(h) > 0){
       e <- usage(x, h, y[i, ])
-      f <- generateUsage(nullTrials, x, h, y[i, ], z)
+      f <- generateUsage(trials, x, h, y[i, ], z)
       mat[i,1] <- e
       mat[i,2] <- mean(f)
       mat[i,3] <- var(f)
@@ -96,7 +121,7 @@ CalculateEntropy <- function(x, y, z){
 
     if (length(h2) > 0){
       e2 <- usage(x, h2, y[i, ])
-      f2 <- generateUsage(nullTrials, x, h2, y[i,], z)
+      f2 <- generateUsage(trials, x, h2, y[i,], z)
       mat2[i,1] <- e2      
       mat2[i,2] <- mean(f2)
       mat2[i,3] <- var(f2)
@@ -106,26 +131,7 @@ CalculateEntropy <- function(x, y, z){
   return(a)
 }
 
-
-# Read in codon table and create a hash table with aa, [codons] key,value pairs
-codons <- read.table("../data/codon_table.txt", header = T, sep = "", 
-        as.is = c(1,2))
-codonTable <- hash()
-for (i in 1:length(codons$codon)){
-  if (all(has.key(codons$aa[i], codonTable))){
-    codonTable[[codons$aa[i]]] <- append(codonTable[[codons$aa[i]]], codons$codon[i])
-  }
-  else {
-    codonTable[[codons$aa[i]]] <- codons$codon[i]
-  } 
-}
-
-
-# Read in species info
-primates <- read.table("../data/primate-species-16fam.csv", header = T, 
-                        sep = ";", quote = "")
-
-# Code to change sequence of coding dna into sequence of amino acids
+# Convert sequence of coding dna into amino acid sequence
 dnaToAA <- function(x) {
     n <- length(x)
     
@@ -185,8 +191,7 @@ processFile <- function(file) {
                 genus = genus, family = as.factor(family), dna = gene, aa = aa))
 }
 
-
-# calculate entropy statistic
+# calculate entropy statistic from a vector of counts
 entropy <- function(x) {
   y <- x[x>0]
   p <- y/sum(y)
@@ -199,7 +204,7 @@ codon.sample <- function(n,p) {
   x <- rep(0,n)
   for ( i in 1:n )
     x[i] <- sum(s==i)
-  return( x )
+  return(x)
 }
 
 # sample from null distribution
@@ -210,23 +215,13 @@ null.sample <- function(B,n,p) {
   }
   return(out)
 }
-
-# Read in mouse genome-wide codon usage frequency
-mouseUsage <- function(){
-  codons <- read.table("../data/use_mouse.txt", header = T, sep = "", as.is = 1)
-  codonUsageFreq <- hash()
-  for (i in 1:length(codons$codon)){
-    codonUsageFreq[[codons$codon[i]]] <- codons$freq[i]
-  }
-  return(codonUsageFreq)
-}
   
 # Function to sample variable length vectors (deals with length=1)
 sample.primates <- function(x, ...) x[sample(length(x), ...)]
 
-# Function to sample one species from each family, B times
+# Sample one species from each family, B times
 # Return in a matrix with B rows, each row is a sample of the indicies
-# 6/20/14 - Exclude families with no sequenced representatives in a particular gene
+# Exclude families with no sequenced representatives in a particular gene
 sampleSpecies <- function(B,x) {
     nfamilies <- length(levels(x$family))
     out <- matrix(0,B,nfamilies)
@@ -239,9 +234,9 @@ sampleSpecies <- function(B,x) {
     return(out)
 }
 
-
-# Return a vector of indices of synonymous aa sites from a group of taxa (including all same codon)
-synonymousSites1 <- function(x, s) {
+# Return a vector of indices of synonymous aa sites from a group of taxa 
+# Include wholly conserved sites
+AllSynonymousSites <- function(x, s) {
   synSites <- vector()
   for (i in 1:length(x$aa[1,])){
     residue <- character(length(s))
@@ -255,8 +250,9 @@ synonymousSites1 <- function(x, s) {
   return(synSites)
 }
 
-# Function to return a vector of indices of synonymous aa sites from a group of taxa (exclude all exact same codons)
-synonymousSites2 <- function(x, s) {
+# Return a vector of indices of synonymous aa sites from a group of taxa 
+# Exclude wholly conserved sites
+VariableSynonymousSites <- function(x, s) {
   synSites <- vector()
   for (i in 1:length(x$aa[1,])){
     residue <- character(length(s))
@@ -275,10 +271,9 @@ synonymousSites2 <- function(x, s) {
   return(synSites)
 }
 
-
-# Function to find gc content of all third codon positions in an alignment.
-# x is a matrix of characters
-gcContent3 <- function(x) {
+# Find GC content of all third codon positions in an alignment given a matrix
+# of characters `x`
+ThirdPosGCContent <- function(x) {
   nsites <- ncol(x)
   if ( nsites %% 3 != 0 )
     stop("Expected number of sites to be a multiple of 3")
@@ -288,7 +283,6 @@ gcContent3 <- function(x) {
   at <- sum(dna.tab[ which(dimnames(dna.tab)[[1]] %in% c('a','t')) ])
   return( gc / (gc+at) )
 }
-
 
 #Calculate codon frequencies based on GC content of each gene
 gcCodonUsage <- function(gc){
@@ -330,7 +324,6 @@ gcCodonUsage <- function(gc){
   }
   return(codonUsageFreq)
 }
-
 
 # Calculate codon frequencies based on observed frequencies per gene
 geneCodonUsage <- function(gene){
@@ -374,7 +367,6 @@ cHash <- function(x){
   return(a)
 }
 
-
 # Generate the summed entropy from B samples of a gene given a null distribution of codon usage
 generateUsage <- function(B, x, y, z, cuf){
   m <- matrix(nrow = B, ncol = length(y))
@@ -391,7 +383,7 @@ generateUsage <- function(B, x, y, z, cuf){
   return(n)
 }
 
-# Function to compute the entropy statistics over a vector y of synonymous sites
+# Compute the entropy statistics over a vector y of synonymous sites
 usage <- function(x, y, z){
   entropyList <- c()
   
@@ -469,10 +461,7 @@ seqGenerator <- function(){
   close(g)
 }
 
-#Read in the gene names. "aligned_coding_genes.txt" must be present in the working directory
-genes <- scan("../data/test_genes.txt", what = '')
-
-if (seqs == 1){
+if (genSeqs){
   fastOut <- hash()
   aaOut <- hash()
   
@@ -484,7 +473,7 @@ if (seqs == 1){
 
 final <- Main(genes)
 
-if (seqs == 1){
+if (genSeqs){
     seqGenerator()
 }
 
