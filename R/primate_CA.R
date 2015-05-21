@@ -1,6 +1,6 @@
 # Martin Bontrager
 # Bret Larget
-# Testing Common Ancestry at the "Family" level in primates.
+# Testing Common Ancestry at the family level in primates.
 
 # This script takes input in the form of a list of fasta files aligned 
 # in the correct reading frame, a mouse whole-genome codon usage table, the
@@ -59,26 +59,26 @@ mouseUsage <- function(){
 # Reads in a list of filenames with aligned nucleotide sequences (starting and ending at coding positions)
 Main <- function(x){
   
+  
   labels <- c("GC.All", "GC.Var", "Mouse.All", "Mouse.Var", "PerGene.All", 
               "PerGene.Var")
-  
   L <- setNames(replicate(6, matrix(0, nrow = repsPerGene, ncol = 3, 
-        dimnames <- list(paste("Trial",1:repsPerGene), 
+        dimnames = list(paste("Trial",1:repsPerGene), 
         c("Observed", "Expected", "Var"))), simplify = FALSE), labels)
+  mouse <- mouseUsage()
   
   for (i in 1:length(x)){
     
     gene <- processFile(paste("../data/aligned_coding_genes/", x[i], sep=""))
     gc <- ThirdPosGCContent(gene$dna)
     
-    codonFreqGC <- gcCodonUsage(gc)  ## Third position GC content per gene as the expected distribution
-    codonFreqMouse <- mouseUsage()  ## Mouse genome-wide codon usage as the expected
-    codonFreqGene <- geneCodonUsage(gene) ## Per-gene codon usage distribution as the expected
+    codonFreqGC <- gcCodonUsage(gc)  # Third position GC content per gene as the expected distribution
+    codonFreqGene <- geneCodonUsage(gene) # Per-gene codon usage distribution as the expected
     
     taxa <- sampleSpecies(repsPerGene, gene)
 
     a <- CalculateEntropy(gene, taxa, codonFreqGC)
-    b <- CalculateEntropy(gene, taxa, codonFreqMouse)
+    b <- CalculateEntropy(gene, taxa, mouse)
     c <- CalculateEntropy(gene, taxa, codonFreqGene)
     
     L[]$GC.All <- L[]$GC.All + a[[1]]
@@ -386,7 +386,7 @@ generateUsage <- function(B, x, y, z, cuf){
 # Compute the entropy statistics over a vector y of synonymous sites
 usage <- function(x, y, z){
   entropyList <- c()
-  
+
   for (i in 1:length(y)){
     startPos <- (y[i]*3)-2
     a <- codonToAAone(paste(x$dna[z[1], startPos:(startPos+2)], sep = '', collapse = ''))
@@ -405,8 +405,6 @@ usage <- function(x, y, z){
     e <- c()
     for (l in 1:length(d)){
       e <- c(e, b[[d[l]]])
-      print(e)
-      print(entropy(e))
     }
     entropyList <- c(entropyList, entropy(e))    
   }
@@ -477,6 +475,8 @@ if (genSeqs){
     seqGenerator()
 }
 
+# Write all of the output observed, mean expected, and variance expected entropy
+# to files for subsequent analysis.
 write.table(final[]$GC.All, file = "../results/GC.All.txt", quote = FALSE, row.names = FALSE, col.names = FALSE)
 write.table(final[]$GC.Var, file = "../results/GC.Var.txt", quote = FALSE, row.names = FALSE, col.names = FALSE)
 write.table(final[]$Mouse.All, file = "../results/Mouse.All.txt", quote = FALSE, row.names = FALSE, col.names = FALSE)
