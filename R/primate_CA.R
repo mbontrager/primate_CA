@@ -30,7 +30,7 @@ primates <- read.table("../data/primate-species-16fam.csv", header = T,
                        sep = ";", quote = "")
 
 # List of aligned fasta files to be included
-genes <- scan("../data/test_genes.txt", what = '')
+genes <- scan("../data/aligned_coding_genes.txt", what = '')
 
 # Read codon table and create a hash table with aa,[codons] key,value pairs
 codons <- read.table("../data/codon_table.txt", header = T, sep = "", 
