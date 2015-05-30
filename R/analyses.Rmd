@@ -14,7 +14,7 @@ knitr::opts_chunk$set(fig.width=12, fig.height=8, fig.path='Figs/',
 ```{r single_plots}
 #Set the working directory to the directory in which the script is run.
 set.seed(9373399)
-setwd("~/Dropbox/Projects/primate_CA/results/")
+setwd("/home/martin/Dropbox/Projects/primate_CA/results/")
 
 library("ggplot2")
 library("reshape2")
@@ -118,8 +118,9 @@ facet_plot <- ggplot(total, aes(x=Entropy, fill=Measure)) +
           axis.text.y = element_blank(),
           axis.title.y = element_blank(),
           legend.title = element_blank(),
-          strip.text.x = element_text(size=rel(1.1)),
-          strip.text.y = element_text(size=rel(1.1)),
+          strip.text.x = element_text(size=rel(1.2)),
+          strip.text.y = element_text(size=rel(1.2)),
+          legend.text = element_text(size=rel(1.2)),
           plot.title = element_text(size = rel(1.45), face = "bold", vjust = 1))
 facet_plot
 ```
@@ -133,32 +134,33 @@ vars <- data.frame(expand.grid(levels(total$Distribution),
                                levels(total$Codons)))
 colnames(vars) <- c("Distribution", "Codons")
 sds <- round(mean_distance$x, 1) # Round SDs to one decimal place
+sds <- paste(sds, "SD")
 xvals <- c(1250, 1250, 1120, 725, 775, 675)
+
 # Populate the new data frames with (x, y) coordinates and line information.
 # Each of these data frames adds data to specified frames
 dat <- data.frame(x = xvals, y = rep(6.5, len), vars, 
                   labs = sds, Measure = rep("Observed", len))
-dat1 <- data.frame(x = 1250, xmin = 450, xmax = 2000, y = 5.5, 
+dat1 <- data.frame(x = 1250, xmin = 460, xmax = 2000, y = 5.5, 
                    Codons = factor("All", levels = c("All", "Var")), 
                    Measure = rep("Observed", 6), 
                    Distribution = factor(c("GC", "Mouse")), 
                    levels = c("GC", "Mouse", "PerGene"))
-dat2 <- data.frame(x = 1120, xmin = 450, xmax = 1750, y = 5.5, 
+dat2 <- data.frame(x = 1120, xmin = 460, xmax = 1750, y = 5.5, 
                    Codons = factor("All", levels = c("All", "Var")), 
                    Measure = rep("Observed", 6), 
                    Distribution = factor("PerGene"), 
                    levels = c("GC", "Mouse", "PerGene"))
-dat3 <- data.frame(x = 700, xmin = 450, xmax = 1050, y = 5.5, 
+dat3 <- data.frame(x = 700, xmin = 460, xmax = 1050, y = 5.5, 
                    Codons = factor("Var", levels = c("All", "Var")), 
                    Measure = rep("Observed", 6), 
                    Distribution = factor(c("GC", "Mouse")), 
                    levels = c("GC", "Mouse", "PerGene"))
-dat4 <- data.frame(x = 700, xmin = 450, xmax = 900, y = 5.5, 
+dat4 <- data.frame(x = 700, xmin = 460, xmax = 900, y = 5.5, 
                    Codons = factor("Var", levels = c("All", "Var")), 
                    Measure = rep("Observed", 6), 
                    Distribution = factor("PerGene"), 
                    levels = c("GC", "Mouse", "PerGene"))
-
 
 facet_plot + geom_text(aes(x, y, label=labs, group = NULL), data = dat) +
              geom_errorbarh(data=dat1, aes(x=x, xmin=xmin, xmax=xmax, y=y)) +
@@ -167,4 +169,3 @@ facet_plot + geom_text(aes(x, y, label=labs, group = NULL), data = dat) +
              geom_errorbarh(data=dat4, aes(x=x, xmin=xmin, xmax=xmax, y=y))
 
 ```
-
