@@ -9,10 +9,10 @@
 # codon translation, and a large list of primate species (which match headers
 # in the alignments). It returns a table with `repsPerGene` draws of the family
 # representative. For each n in `repsPerGene` it calculates the observed 
-# entropy, and draws `trials` times from three different codon usage 
-# distributions to generate a mean expected entropy statistic under that model.
-# We also return the mean expected entropy stat if wholly conserved positions 
-# are excluded. Variance around expected entropy is also returned.
+# entropy, and draws n=trials times from three different codon usage 
+# models to generate mean expected entropy and variance under the model.
+# We also return the mean expected entropy stat if invariant degenerate
+# positions are excluded
 
 # User-defined Parameters------------------------------------------------------
 
@@ -20,7 +20,7 @@ alignedGenes <- "../data/aligned_coding_genes.txt" # Aligned gene fasta files
 repsPerGene <- 50   # Number of spcecies draws to be family representatives
 trials <- 100       # Draws from the expected codon usage distribution
 set.seed(353204)
-genSeqs <- TRUE    # If "TRUE" will output repsPerGene nuc alignment files
+genSeqs <- FALSE    # If "TRUE" will output repsPerGene nuc alignment files
 
 # Load packages and setwd------------------------------------------------------
 
@@ -41,9 +41,9 @@ primateCA <- function(geneNames){
   
   labels <- c("GC.All", "GC.Var", "Mouse.All", "Mouse.Var", "PerGene.All", 
               "PerGene.Var")
-  entropyList <- setNames(replicate(6, matrix(0, nrow = repsPerGene, ncol = 3, 
-        dimnames = list(paste("Trial",1:repsPerGene), 
-        c("Observed", "Expected", "Var"))), simplify = FALSE), labels)
+  entropyList <- setNames(replicate(6, matrix(0, nrow=repsPerGene, ncol=3, 
+                dimnames=list(1:repsPerGene, c("Observed", "Expected", "Var"))), 
+                simplify=FALSE),labels)
   
   # Generate Mouse whole-genome codon usage distribution
   mouse <- genMouseUsage()
@@ -79,11 +79,9 @@ primateCA <- function(geneNames){
 CalculateEntropy <- function(gene, taxaList, codonFreq, generator = FALSE){
 
   allSites <- matrix(0, nrow = repsPerGene, ncol = 3, 
-    dimnames = list(paste("Trial",1:repsPerGene), 
-    c("Observed", "Expected", "Var")))
+                dimnames=list(1:repsPerGene, c("Observed", "Expected", "Var")))
   varSites <- matrix(0, nrow = repsPerGene, ncol = 3, 
-    dimnames = list(paste("Trial",1:repsPerGene), 
-    c("Observed", "Expected", "Var")))
+                dimnames=list(1:repsPerGene, c("Observed", "Expected", "Var")))
   
   for (i in 1:repsPerGene){
     # Use all degenerate sites in the alignment
@@ -499,8 +497,8 @@ if (genSeqs){
 }
 
 # Write observed, mean expected, and variance expected entropy to files
-write.table(final[]$GC.All, file = "../results/GC.All.txt", quote = FALSE, 
-            row.names = FALSE, col.names = TRUE)
+write.table(final[]$GC.All, file="../results/GC.All.txt", quote=FALSE, 
+            row.names=FALSE, col.names=TRUE)
 write.table(final[]$GC.Var, file = "../results/GC.Var.txt", quote = FALSE, 
             row.names = FALSE, col.names = TRUE)
 write.table(final[]$Mouse.All, file = "../results/Mouse.All.txt", quote = FALSE, 
