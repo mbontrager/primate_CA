@@ -1,0 +1,191 @@
+---
+title: "Primate Common Ancestry Plots"
+author: "Martin Bontrager"
+date: "Tuesday, May 26, 2015"
+output: html_document
+---
+
+```{r global_options, include=FALSE}
+knitr::opts_chunk$set(fig.width=12, fig.height=8, fig.path='Figs/',
+                      echo=FALSE, warning=FALSE, message=FALSE)
+```
+
+#Plots from single observed to expected distributions:
+```{r single_plots}
+#Set the working directory to the directory in which the script is run.
+set.seed(9373399)
+setwd("D:/Users/Martin/Dropbox/Projects/primate_CA/results/")
+
+library("ggplot2")
+library("reshape2")
+
+library("ggplot2")
+library("reshape2")
+
+files <- list.files(pattern="*.txt")
+
+histogramPlot <- function(){
+    
+  # Build a plot with one observed value and its matching expected distribution    
+  single_plot <- (ggplot() + aes(dens) + geom_density(fill="gray75", size=0.7))+
+  ggtitle(paste(b, "Entropy Distribution")) +
+  xlim((a[1,1]-xScale), (a[1,2]+xScale)) +
+  theme_bw() +
+  theme(axis.title = element_text(size = rel(1.3)),
+          axis.text = element_text(size = rel(1.1)),
+          axis.title.y = element_blank(),
+          plot.title = element_text(size = rel(1.6))) +
+  xlab("Entropy") + ylab("Density")
+
+  
+  # Annotate the plot with relative positioning of text and bars
+  yrange <- ggplot_build(single_plot)$panel$ranges[[1]]$y.range
+  xrange <- ggplot_build(single_plot)$panel$ranges[[1]]$x.range
+  single_plot <- single_plot +   
+      annotate("segment", x = a[1,1], xend = a[1,1], y = 0, yend = yrange[2]/2.1, 
+                color="black", size=1.0, linetype="longdash") +
+      annotate("text", x = mean(c(a[1,1], a[1,2])), y = yrange[2]/1.7, 
+               label = sd_away, size = 9) + 
+      annotate("errorbarh", x = mean(c(a[1,1], a[1,2])), xmin = a[1,1], 
+             xmax = mean(dens), y = yrange[2]/1.9, height = 0.004, size = 0.75)
+  print(single_plot)
+
+}
+
+total <- data.frame(Observed=numeric(), 
+                    Expected=numeric(), 
+                    Variance=numeric(), 
+                    Distribution=factor(),
+                    Codons=factor(),
+                    Distance=numeric())
+
+for (i in files){
+    a <- read.table(i)
+    b <- gsub(".txt", "", i)
+    d <- unlist(strsplit(b, "[.]"))
+    colnames(a) <- c("Observed","Expected","Variance")
+    a$Distribution <- as.factor(d[1])
+    a$Codons <- as.factor(d[2])
+    a$Distance <- round(((a$Expected - a$Observed) / sqrt(a$Variance)), 1)
+    
+    # Scale plots to similar visual dimensions and annotation positions
+    dens <- rnorm(100, a[1,2], sqrt(a[1,3]))
+    sd_away <- paste(round(((a[1,2] - a[1,1]) / sqrt(a[1,3])), 1), "SD")
+    xScale <- (mean(dens) - a[1,1]) * 0.07 # Scale the x-axis relatively
+    
+    # Create the plot
+    histogramPlot()
+
+    #Merge separate data frames
+    total <- rbind(total, a)
+}
+```
+
+#Generate plots from entire distributions
+
+I want to create a facetted plot of all distributions with annotations. This is harder than you might think. I did some of the necessary work above when I bound all the separate data files together into one big data frame and added factors based on the distribution and which codons were used. That new data frame looks like this:
+```{r total_frame}
+str(total)
+head(total)
+```
+
+###Melting/reshaping data
+
+Now that I have that, I need to reshape the data by melting it. This is provided by the package `reshape2` and it works really great. I can also remove the Variance paramter, since it is paired with the expected entropy and I'm really only working with the mean expected entropy now for plotting purposes. Essentially I combine all entropy measures into one column, and give them a factor of either "Observed" or "Expected" instead of having two separate entropy columns. I'm also re-naming the columns:
+
+I am also using the `aggregate` function to spit back a list of the means of S.D. away from each observed to expected. `aggregate is a cool function. 
+
+```{r melt, echo=TRUE}
+mean_distance <- aggregate(total$Distance, by=list(total$Distribution, 
+                                               total$Codons), FUN=mean)
+total$Variance <- NULL
+total_annot <- total
+total$Distance <- NULL
+total <- melt(total, measured=c("Observed", "Expected"))
+colnames(total) <- c("Distribution", "Codons", "Measure", "Entropy")
+# Change the factor levels for plotting purposes:
+codLabels <- c("All Codons", "Variable Codons")
+levels(total$Codons) <- codLabels
+str(total)
+head(total)
+```
+
+### Facetted plot
+Now I need to plot the data on one plot. This took me quite a while to get into this format, and the theme elements and whatnot are very handy for future reference:
+```{r facet_plot1, echo=TRUE}
+facet_plot <- ggplot(total, aes(x=Entropy, fill=Measure)) +
+    geom_histogram(binwidth = 10) +
+    scale_fill_manual(values=c("gray75", "black")) +
+    theme_bw() +
+    facet_grid(Distribution ~ Codons, scale = "free") +
+    ggtitle("SD between Observed and Mean Expected Entropy") +
+    theme(axis.title = element_text(size = rel(1.3)), 
+          axis.text.y = element_blank(),
+          axis.title.y = element_blank(),
+          legend.title = element_blank(),
+          strip.text.x = element_text(size=rel(1.3)),
+          strip.text.y = element_text(size=rel(1.3)),
+          legend.text = element_text(size=rel(1.3)),
+          plot.title = element_text(size = rel(1.6), face = "bold", vjust = 1))
+facet_plot
+```
+
+The next step is to add annotations. This is a little tricky since there are several annotations and they need to be added to each facet. The way to do this (according to [this](https://trinkerrstuff.wordpress.com/2012/09/01/add-text-annotations-to-ggplot2-faceted-plot/)) is to create a new data frame with x,y coordinates. This is complicated since I need to add the mean sD distance as well as a horizontal line, and the line will be different for each facet. That will take some manual curation, but when I have it done I think it will look really good. 
+```{r facet_data}
+#Length of the data frame
+len <- length(levels(total$Distribution)) * length(levels(total$Codons))
+# Declare the data frame
+vars <- data.frame(expand.grid(levels(total$Distribution), 
+                               levels(total$Codons)))
+colnames(vars) <- c("Distribution", "Codons")
+sds <- round(mean_distance$x, 1) # Round SDs to one decimal place
+sds <- paste(sds, "SD")
+xvals <- c(1250, 1250, 1120, 725, 775, 675)
+
+# Populate the new data frames with (x, y) coordinates and line information.
+# Each of these data frames adds data to specified frames
+dat <- data.frame(x = xvals, y = rep(6.5, len), vars, 
+                  labs = sds, Measure = rep("Observed", len))
+dat1 <- data.frame(x = 1250, xmin = 460, xmax = 1900, y = 5.5, 
+                   Codons = factor("All Codons", 
+                                   levels = c("All Codons", "Variable Codons")), 
+                   Measure = rep("Observed", 6), 
+                   Distribution = factor(c("GC", "Mouse")), 
+                   levels = c("GC", "Mouse", "PerGene"))
+dat2 <- data.frame(x = 1120, xmin = 460, xmax = 1750, y = 5.5, 
+                   Codons = factor("All Codons", 
+                                   levels = c("All Codons", "Variable Codons")), 
+                   Measure = rep("Observed", 6), 
+                   Distribution = factor("PerGene"), 
+                   levels = c("GC", "Mouse", "PerGene"))
+dat3 <- data.frame(x = 700, xmin = 460, xmax = 1025, y = 5.5, 
+                   Codons = factor("Variable Codons", 
+                                   levels = c("All Codons", "Variable Codons")), 
+                   Measure = rep("Observed", 6), 
+                   Distribution = factor(c("GC", "Mouse")), 
+                   levels = c("GC", "Mouse", "PerGene"))
+dat4 <- data.frame(x = 700, xmin = 460, xmax = 900, y = 5.5, 
+                   Codons = factor("Variable Codons", 
+                                   levels = c("All Codons", "Variable Codons")), 
+                   Measure = rep("Observed", 6), 
+                   Distribution = factor("PerGene"), 
+                   levels = c("GC", "Mouse", "PerGene"))
+
+facet_plot + geom_text(aes(x, y, label=labs, group=NULL), data = dat) +
+             geom_errorbarh(data=dat1, aes(x=x, xmin=xmin, xmax=xmax, y=y)) +
+             geom_errorbarh(data=dat2, aes(x=x, xmin=xmin, xmax=xmax, y=y)) +
+             geom_errorbarh(data=dat3, aes(x=x, xmin=xmin, xmax=xmax, y=y)) +
+             geom_errorbarh(data=dat4, aes(x=x, xmin=xmin, xmax=xmax, y=y))
+
+```
+
+I thought of another way I can explain these data, which is to explain the relationship between sequence length and distances from observed to expected. Which is to say, as we add more and more data in the form of aligned sequences, do we see an increase or decrease in the distance? I can used the 'observed entropy' as a proxy for distance (since this only increases as the alignment lengths get longer) and the distance in S.D. as my measured value, and then just create a simple linear regression showing that as observed entropy increases, distance also increases.
+
+```{r pergene_lm}
+x <- total_annot[total_annot$Distribution == "PerGene", ]
+x <- x[x$Codons == "Var", ]
+qplot(x$Observed, x$Distance, geom=c("point", "smooth"), method=lm, formula=y~x)
+lm.pergene.var <- lm(x$Distance ~ x$Observed)
+summary(lm.pergene.var)
+```
+You can see that there is a clear relationship that as the summed entropy increases, the distance observed to expected also increases. These data are i.i.d. normal.
