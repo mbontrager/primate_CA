@@ -16,6 +16,7 @@
 
 # User-defined Parameters------------------------------------------------------
 
+alignedGenes <- "../data/aligned_coding_genes.txt" # Aligned gene fasta files
 repsPerGene <- 50   # Number of spcecies draws to be family representatives
 trials <- 100       # Draws from the expected codon usage distribution
 set.seed(353204)
@@ -473,7 +474,7 @@ if (genSeqs){
 }
 
 # List of aligned fasta files to be included
-genes <- scan("../data/test_genes.txt", what = '')
+genes <- scan(alignedGenes, what = '')
 
 # Read codon table and create a hash table with aa,[codons] key,value pairs
 codons <- read.table("../data/codon_table.txt", header = T, sep = "", 
