@@ -41,8 +41,9 @@ primateCA <- function(geneNames){
   
   labels <- c("GC.All", "GC.Var", "Mouse.All", "Mouse.Var", "PerGene.All", 
               "PerGene.Var")
-  entropyList <- setNames(replicate(6, matrix(0, nrow=repsPerGene, ncol=3, 
-                dimnames=list(1:repsPerGene, c("Observed", "Expected", "Var"))), 
+  entropyList <- setNames(replicate(6, matrix(0, nrow=repsPerGene, ncol=4, 
+                dimnames=list(1:repsPerGene, 
+                              c("Observed", "Expected", "Var", "Length"))), 
                 simplify=FALSE),labels)
   
   # Generate Mouse whole-genome codon usage distribution
@@ -78,10 +79,12 @@ primateCA <- function(geneNames){
 #Calculate entropy and generate null distribution
 CalculateEntropy <- function(gene, taxaList, codonFreq, generator = FALSE){
 
-  allSites <- matrix(0, nrow = repsPerGene, ncol = 3, 
-                dimnames=list(1:repsPerGene, c("Observed", "Expected", "Var")))
-  varSites <- matrix(0, nrow = repsPerGene, ncol = 3, 
-                dimnames=list(1:repsPerGene, c("Observed", "Expected", "Var")))
+  allSites <- matrix(0, nrow = repsPerGene, ncol = 4, 
+                dimnames=list(1:repsPerGene, 
+                              c("Observed", "Expected", "Var", "Length")))
+  varSites <- matrix(0, nrow = repsPerGene, ncol = 4, 
+                dimnames=list(1:repsPerGene, 
+                              c("Observed", "Expected", "Var", "Length")))
   
   for (i in 1:repsPerGene){
     # Use all degenerate sites in the alignment
@@ -97,6 +100,7 @@ CalculateEntropy <- function(gene, taxaList, codonFreq, generator = FALSE){
       allSites[i,1] <- observedEntropyAll
       allSites[i,2] <- mean(expectedEntropyAll)
       allSites[i,3] <- var(expectedEntropyAll)
+      allSites[i,4] <- length(allSynSites)
     }
 
     if (length(varSynSites) > 0){
@@ -107,6 +111,7 @@ CalculateEntropy <- function(gene, taxaList, codonFreq, generator = FALSE){
       varSites[i,1] <- observedEntropyVar      
       varSites[i,2] <- mean(expectedEntropyVar)
       varSites[i,3] <- var(expectedEntropyVar)
+      varSites[i,4] <- length(varSynSites)
     }
   }
   a <- list(allSites, varSites)

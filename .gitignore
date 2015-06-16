@@ -4,3 +4,5 @@ results
 working/
 data/test_genes.txt
 R/primate_CA.old.R
+R/Figs
+R/analyses.html
