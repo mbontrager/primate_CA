@@ -1,7 +1,8 @@
+# -----------------------------------------------------------------------------
 # Martin Bontrager
 # Bret Larget
 # Testing Common Ancestry at the family level in primates.
-
+# -----------------------------------------------------------------------------
 # Source script from `/R` directory
 
 # This script takes input in the form of a list of fasta files aligned 
