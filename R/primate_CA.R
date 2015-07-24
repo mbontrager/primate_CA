@@ -21,7 +21,7 @@ alignedGenes <- "../data/aligned_coding_genes.txt" # Aligned gene fasta files
 repsPerGene <- 50   # Number of spcecies draws to be family representatives
 trials <- 100       # Draws from the expected codon usage distribution
 set.seed(353204)
-genSeqs <- FALSE    # If "TRUE" will output repsPerGene nuc alignment files
+genSeqs <- TRUE    # If "TRUE" will output repsPerGene nuc alignment files
 
 # Load packages and setwd------------------------------------------------------
 
@@ -138,7 +138,11 @@ dnaToAA <- function(x) {
             aa[i] <- '-'
         } else {
           aa[i] <- codonToAAone(paste(x[(i*3)-2], x[(i*3)-1], x[i*3], sep = ""))
-        } 
+        }
+        
+        if (aa[i] == "Stop"){
+            aa[i] <- "X"
+        }
     }
     return(aa)
 }
@@ -427,24 +431,33 @@ calculateObservedEntropy <- function(gene, sites, taxaReps){
 sequenceOutput <- function(gene, sites, taxa, iteration){
     
     alignLengths <- (length(sites) * 3)
+    codingLength <- length(gene$aa[1,])
     newOutput <- matrix(, 16, alignLengths)
+    aaOutput <- matrix(, 16, codingLength)
     rownames(newOutput) <- rownames(sequences[[iteration]])
+    rownames(aaOutput) <- rownames(aaSeqs[[iteration]])
     
     for (i in rownames(newOutput)){
         if (!(i %in% levels(gene$family))){
             newOutput[i, ] <- rep("-", alignLengths)
+            aaOutput[i, ] <- rep("-", codingLength)
         }
     }
     for (t in taxa){
         s <- vector()
+        s1 <- vector()
+        
         for (j in sites){
             startPos <- (j*3)-2
             s <- c(s, c(gene$dna[t, startPos:(startPos+2)]))
         }
+        
         fam <- as.character(gene$family[t])
         newOutput[fam, ] <- s
+        aaOutput[fam, ] <- paste(gene$aa[t, ], sep="")
     }
     sequences[[iteration]] <<- cbind(sequences[[iteration]], newOutput)
+    aaSeqs[[iteration]] <<- cbind(aaSeqs[[iteration]], aaOutput)
 }
 
 # Given a large list of n output alignments, where n is repsPerGene, write n 
@@ -455,9 +468,22 @@ writeOutputToFiles <- function() {
         fileName <- paste0("../results/seq/degenAlignment_", i, ".fa")
         f <- file(fileName, "w")
         alignment <- apply(sequences[[i]], 1, paste, collapse="")
+
         for (j in levels(primates$Family)){
             writeLines(paste0(">", j), con=f)
-            writeLines(alignment[[j]], con=f)    
+            writeLines(alignment[[j]], con=f)
+        }
+        close(f)
+    }
+    
+    for (i in 1:repsPerGene){    
+        fileName <- paste0("../results/seq/aaAlignment_", i, ".fa")
+        f <- file(fileName, "w")
+        aaAlignment <- apply(aaSeqs[[i]], 1, paste, collapse="")
+        
+        for (j in levels(primates$Family)){
+            writeLines(paste0(">", j), con=f)
+            writeLines(aaAlignment[[j]], con=f)
         }
         close(f)
     }
@@ -471,9 +497,12 @@ primates <- read.table("../data/primate-species-16fam.csv", header = T,
 # If sequences are to be output, set up the output structure
 if (genSeqs){
     sequences <- list()
+    aaSeqs <- list()
     for (i in 1:repsPerGene){
         sequences[[i]] <- matrix(, length(levels(primates$Family)), 0)
+        aaSeqs[[i]] <- matrix(, length(levels(primates$Family)), 0)
         dimnames(sequences[[i]]) <- list(levels(primates$Family))
+        dimnames(aaSeqs[[i]]) <- list(levels(primates$Family))
     }
 }
 
