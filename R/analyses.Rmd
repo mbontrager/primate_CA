@@ -12,7 +12,7 @@ knitr::opts_chunk$set(fig.width=6, fig.height=4, fig.path='Figs/',
 
 #Plots from single observed to expected distributions:
 ```{r single_plots}
-setwd("D:/Users/Martin/Dropbox/Projects/primate_CA/results")
+#setwd("D:/Users/Martin/Dropbox/Projects/primate_CA/results")
 # Set the seed for reproducibility and load libraries
 set.seed(9373399)
 # May need to explicitly set full path working dir here. I don't know why
@@ -20,6 +20,7 @@ set.seed(9373399)
 
 library("ggplot2")
 library("reshape2")
+library("dplyr")
 
 files <- list.files(pattern="*.txt")
 
@@ -172,6 +173,51 @@ facet_plot + geom_text(aes(x, y, label=labs, group=NULL), data = dat, size=4) +
              geom_errorbarh(data=dat1, aes(x=x, xmin=xmin, xmax=xmax, y=y)) +
              geom_errorbarh(data=dat2, aes(x=x, xmin=xmin, xmax=xmax, y=y)) +
              geom_errorbarh(data=dat3, aes(x=x, xmin=xmin, xmax=xmax, y=y)) +
+             geom_errorbarh(data=dat4, aes(x=x, xmin=xmin, xmax=xmax, y=y))
+
+```
+
+I want to subset these analyses to only include the PerGene GC content model:
+
+```{r pergene, fig.width=6, fig.height=4}
+pergene <- filter(total, Distribution == "PerGene") %>% droplevels()
+#Length of the data frame
+len <- length(levels(pergene$Distribution)) * length(levels(pergene$Codons))
+# Declare the data frame
+vars <- data.frame(expand.grid(levels(pergene$Distribution), 
+                               levels(pergene$Codons)))
+colnames(vars) <- c("Distribution", "Codons")
+sds <- round(filter(mean_distance, Group.1 == "PerGene")$x, 1) # Round SDs to one decimal place
+sds <- paste(sds, "SD")
+xvals <- c(1250, 725)
+
+dat <- data.frame(x = xvals, y = rep(7.5, len), vars, 
+                  labs = sds, Measure = rep("Observed", len))
+dat2 <- data.frame(x = 1120, xmin = 460, xmax = 1750, y = 6.5, 
+                   Codons = factor("All Codons", 
+                                   levels = c("All Codons", "Variable Codons")), 
+                   Measure = rep("Observed", 6), 
+                   Distribution = factor("PerGene"), 
+                   levels = c("PerGene"))
+dat4 <- data.frame(x = 700, xmin = 460, xmax = 900, y = 6.5, 
+                   Codons = factor("Variable Codons", 
+                                   levels = c("All Codons", "Variable Codons")), 
+                   Measure = rep("Observed", 6), 
+                   Distribution = factor("PerGene"), 
+                   levels = c("PerGene"))
+
+ggplot(pergene, aes(x=Entropy, fill=Measure)) +
+    geom_histogram(binwidth = 10) +
+    scale_fill_manual(values=c("gray75", "black")) +
+    theme_bw() +
+    facet_grid(Distribution ~ Codons, scale = "free") +
+    theme(axis.text.y = element_blank(),
+          axis.title.y = element_blank(),
+          legend.title = element_blank(),
+          strip.text.y = element_blank(),
+          plot.title = element_blank()) +
+    geom_text(aes(x, y, label=labs, group=NULL), data = dat, size=4) +
+             geom_errorbarh(data=dat2, aes(x=x, xmin=xmin, xmax=xmax, y=y)) +
              geom_errorbarh(data=dat4, aes(x=x, xmin=xmin, xmax=xmax, y=y))
 
 ```
